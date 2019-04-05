@@ -15,6 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\bg-title-01.jpg" />
+    <Content Remove="wwwroot\images\silde03.jpg" />
+    <Content Remove="wwwroot\images\slide01.jpg" />
+    <Content Remove="wwwroot\images\slide02.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
@@ -24,6 +31,12 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Assets\Admin\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\silde03.jpg" />
+    <None Include="wwwroot\images\slide01.jpg" />
+    <None Include="wwwroot\images\slide02.jpg" />
   </ItemGroup>
 
 </Project>

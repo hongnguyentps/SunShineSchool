@@ -1,0 +1,155 @@
+﻿html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+    padding-top: 20px;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+        content: '';
+        content: none;
+    }
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.container {
+    height: 50px;
+}
+.carousel-inner {
+    height: 400px;
+}
+
+.nav-bar-home {
+    list-style-type: none;
+    background: #65ccde;
+    border-radius: 30px;
+    height: 40px;
+    color: #fff;
+}
+
+    ul.nav-bar-home li {
+        height: 40px;
+        padding: 10px;
+    }
+
+        .nav-bar-home li:hover {
+            background-color: #fff;
+            color: #00a7a7;
+        }
+
+            .nav-bar-home li:hover > .sub {
+                display: block;
+                top: 42px;
+            }
+
+    .nav-bar-home .sub {
+        height: auto;
+        background-color: #fff;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        display: none;
+        padding: 10px;
+        border: 1px solid #fff;
+        box-shadow: 0px 6px 12px 0px rgba(0,0,0,0.2);
+    }
+
+.sub ul li {
+    margin: 0;
+    padding: 10px;
+    line-height: initial;
+    height: auto;
+}
+
+    .sub ul li:hover {
+        background-color: #f6f6f6;
+        width: calc(100% - 70%);
+        border-radius: 6px;
+    }
+
+        .sub ul li:hover .sub-title-discription {
+            display: block;
+        }
+
+.sub-title-discription {
+    border-left: 1px solid #f6f6f6;
+    padding: 0 10px;
+    top: 0;
+    right: 0;
+    width: calc(100% - 30%);
+    height: 100%;
+    display: none;
+    line-height: 24px;
+}
+
+.triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 100px solid red;
+}
+
+.login {
+    float: right;
+}
+
+.gioithieu {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: #00a7a7;
+}
+
+.tintuc {
+    text-align: justify;
+    color: #00a7a7;
+}
+
+.listRow {
+    background-color: #65ccde;
+    color: #fff;
+    padding: 36px 0 0 50px;
+    height: 140px;
+    font-weight: 700;
+}
+
+    .listRow .tt {
+        padding-bottom: 5px;
+    }
