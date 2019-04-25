@@ -3,8 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebApplication2</title>
-    <link rel="stylesheet" href="~/css/styles.min.css" type="text/css" />
+    <title>@ViewData["Title"] - SunShineSchool</title>
     <link href="~/Assets/Home/main.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <environment include="Development">
@@ -19,182 +18,67 @@
     </environment>
 </head>
 <body>
-    <div class="navbar-collapse collapse login">
-        <partial name="_LoginPartial" />
-    </div>
-    <partial name="_CookieConsentPartial" />
-    <div class="container">
-        <div class="position-relative">
-            <ul class="d-flex justify-content-center nav-bar-home">
-                <li>
-                    <a href="https://localhost:44374/">TRANG CHỦ</a>
-                </li>
-                <li>
-                    <a>
-                        GIỚI THIỆU
-                    </a>
-                    <div class="sub">
-                        <ul class="position-relative">
-                            <li>
-                                <span>Giới thiệu về trường THCS - THPT Sun Shine</span>
-                                <span class="position-absolute sub-title-discription">
-                                    Trường THCS - THPT Sun Shine được thành lập vào ngày 29 tháng 8 năm 2007 của chủ tịch ủy ban nhân dân Thành Phố Hồ Chí Minh. Sau hơn mười năm hình thành và phát triển, Trường THCS – THPT SunShine đã vững vàng khẳng định thương hiệu và là địa chỉ giáo dục đáng tin cậy đối với phụ huynh, học sinh trên địa bàn quận Sun Shine, cũng như Thành phố Hồ Chí Minh và các tỉnh lân cận khác.
-                                </span>
-                            </li>
-                            <li>
-                                <span>Sứ mạng</span>
-                                <span class="position-absolute sub-title-discription">
-                                    Sứ mạng của Trường THCS - THPT Sun Shine là đóng góp và nâng cao tri thức cho cộng đồng bằng các phương thức linh hoạt và thuận tiện nhất.
-                                </span>
-                            </li>
-                            <li>
-                                <span>Thành tích</span>
-                                <span class="position-absolute sub-title-discription">
-                                    Đầu năm học 2018 – 2019 trường vinh dự đón nhận Bằng khen của Ủy ban nhân dân thành phố Hồ Chí Minh trao tặng, danh hiệu “Tập thể lao động xuất sắc năm học 2017 - 2018”, càng vinh dự hơn trường tiếp tục được nhận cờ thi đua “Đơn vị dẫn đầu phong trào thi đua năm học 2017 – 2018”.
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a>
-                        MÔI TRƯỜNG HỌC
-                    </a>
-                    <div class="sub">
-                        <ul class="position-relative">
-                            <li>
-                                <span>Cơ sở vật chất</span>
-                                <span class="position-absolute sub-title-discription">
-                                    Cơ sở giáo dục của Trường THCS - THPT Sun Shine được thiết kế và xây dựng đảm bảo tối đa theo các quy định về an toàn, vệ sinh, phòng cháy chữa cháy, điều kiện thông thoáng, góp phần tạo ra một môi trường học tập vừa thoải mái, vừa an toàn cho học sinh.
-                                </span>
-                            </li>
-                            <li>
-                                <span>Chăm sóc học sinh</span>
-                                <span class="position-absolute sub-title-discription">
-                                    Trường THCS THPT Sun Shine luôn chú trọng trong công tác y tế học đường, góp phần nâng cao chất lượng chăm sóc sức khỏe ban đầu cho học sinh.
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a>
-                        CƠ CẤU TỔ CHỨC
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        KHỐI HỌC SINH
-                    </a>
-                    <div class="sub">
-                        <ul class="position-relative">
-                            <li>Khối 6</li>
-                            <li>Khối 7</li>
-                            <li>Khối 8</li>
-                            <li>Khối 9</li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a>
-                        TUYỂN SINH
-                    </a>
-                    <div class="sub">
-                        <ul class="position-relative">
-                            <li>
-                                <span>Thông tin tuyển sinh</span>
-                                <span class="position-absolute sub-title-discription">
-                                    Trường THCS THPT Sun Shine xây dựng liên cấp II, III vững mạnh với mục tiêu “Dạy học sinh nên người”, với nhiều đổi mới trong năm học 2019-2020
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a>
-                        GÓC PHỤ HUYNH
-                    </a>
-                    <div class="sub">
-                        <ul class="position-relative">
-                            <li>
-                                <span>Chia sẻ phụ huynh</span>
-                            </li>
-                            <li>
-                                <span>Ý kiến đóng góp</span>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a>
-                        TIN TỨC
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        THƯ VIỆN
-                    </a>
-                </li>
-            </ul>
-        </div>
+    <div class="header">
+        <img src="~/Assets/Admin/images/icon/icon4.png" style="height: 100px; margin-left: 238px;"/>
+        <partial name="~/Views/Website/_HeaderTop.cshtml" />
+        <partial name="~/Views/Website/_HeaderBottom.cshtml" />
     </div>
 
     <div class="container body-content">
         @RenderBody()
-        <footer>
-            <div class="container" style="padding-top: 300px;">
-                <div class="row listRow">
-                    <div class="col-3">
-                        <div class="tt">
-                            Hệ thống trường Sun Shine School
-                        </div>
-                        <ul>
-                            <li><a class="ic-tick left fa-caret-right" href="/lequydon" title="SS School L&#234; Qu&#253; Đ&#244;n">SS School L&#234; Qu&#253; Đ&#244;n</a></li>
-                            <li><a class="ic-tick left fa-caret-right" href="/dalat" title="SS School Đ&#224; Lạt">SS School Đà Lạt</a></li>
+    </div>
+    <footer>
+        <div style="padding-top: 300px;">
+            <div class="row listRow">
+                <div class="col-3">
+                    <div class="tt">
+                        Hệ thống trường Sun Shine School
+                    </div>
+                    <ul>
+                        <li><a class="ic-tick left fa-caret-right" href="/lequydon" title="Sun Shine School Gò Vấp">Sun Shine School Gò Vấp</a></li>
+                        <li><a class="ic-tick left fa-caret-right" href="/dalat" title="Sun Shine School Đà Lạt">Sun Shine School Đà Lạt</a></li>
+                    </ul>
+                </div>
+                <div class="col-3">
+                    <div class="tt">Cộng đồng</div>
+                    <ul>
+                        <li><a href="/vi/cong-dong/hoc-sinh-dang-theo-hoc" title="Học sinh đang theo học" class="ic-tick left fa-caret-right">Học sinh đang theo học</a></li>
+                        <li><a href="/vi/cong-dong/su-nghiep-tuong-lai" title="Sự nghiệp tương lai" class="ic-tick left fa-caret-right">Sự nghiệp tương lai</a></li>
+                    </ul>
+                </div>
+                <div class="col-3">
+                    <div class="tt">Thông tin khác</div>
+                    <ul>
+                        <li>
+                            <a href="/vi/quy-dinh-phap-ly" title="Quy định pháp lý">Quy định pháp lý</a>
+                        </li>
+                        <li>
+                            <a href="/vi/dieu-khoan-bao-mat" title="Điều khoản bảo mật">Điều khoản bảo mật</a>
+                        </li>
+                        <li>
+                            <a href="/vi/so-do-trang" title="Sơ đồ trang">Sơ đồ trang</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-3">
+                    <div class="tt">Liên kết website</div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            LienKetWebsite <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="http://ttcedu.vn" target="_blank">Ngành Giáo dục</a></li>
                         </ul>
                     </div>
-                    <div class="col-3">
-                        <div class="tt">Cộng đồng</div>
-                        <ul>
-                            <li><a href="/vi/cong-dong/hoc-sinh-dang-theo-hoc" title="Học sinh đang theo học" class="ic-tick left fa-caret-right">Học sinh đang theo học</a></li>
-                            <li><a href="/vi/cong-dong/su-nghiep-tuong-lai" title="Sự nghiệp tương lai" class="ic-tick left fa-caret-right">Sự nghiệp tương lai</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-3">
-                        <div class="tt">Thông tin khác</div>
-                        <ul>
-                            <li>
-                                <a href="/vi/quy-dinh-phap-ly" title="Quy định pháp lý">Quy định pháp lý</a>
-                            </li>
-                            <li>
-                                <a href="/vi/dieu-khoan-bao-mat" title="Điều khoản bảo mật">Điều khoản bảo mật</a>
-                            </li>
-                            <li>
-                                <a href="/vi/so-do-trang" title="Sơ đồ trang">Sơ đồ trang</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-3">
-                        <div class="tt">Liên kết website</div>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                LienKetWebsite <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="http://ttcedu.vn" target="_blank">Ng&#224;nh Gi&#225;o dục TTC</a></li>
-                            </ul>
-                        </div>
-                        <div class="share mt25">
-                            <a class="fa fa-google-plus" aria-hidden="true" href="https://plus.google.com/" target="_blank" rel=""></a>
-                            <a class="fa fa-linkedin" aria-hidden="true" href="https://www.linkedin.com/" target="_blank" rel=""></a>
-                            <a class="fa fa-twitter" aria-hidden="true" href="https://twitter.com/" target="_blank" rel=""></a>
-                        </div>
+                    <div class="share mt25">
+                        <a class="fa fa-google-plus" aria-hidden="true" href="https://plus.google.com/" target="_blank" rel=""></a>
+                        <a class="fa fa-linkedin" aria-hidden="true" href="https://www.linkedin.com/" target="_blank" rel=""></a>
+                        <a class="fa fa-twitter" aria-hidden="true" href="https://twitter.com/" target="_blank" rel=""></a>
                     </div>
                 </div>
             </div>
-        </footer>
-    </div>
-
+        </div>
+    </footer>
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
@@ -221,7 +105,7 @@
 </body>
 </html>
 <!--Start of Tawk.to Script-->
-<script type="text/javascript">
+@*<script type="text/javascript">
     var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
     (function () {
         var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
@@ -231,20 +115,8 @@
         s1.setAttribute('crossorigin', '*');
         s0.parentNode.insertBefore(s1, s0);
     })();
-</script>
+</script>*@
 <!--End of Tawk.to Script-->
-
-<script type="text/javascript" src="/js/vendor/modernizr-2.8.3.min.js"></script>
-<script type="text/javascript" src="/js/vendor/jquery.min.js"></script>
-<script type="text/javascript" src="/js/gs/TweenMax.min.js"></script>
-<script type="text/javascript" src="/js/vendor/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/vendor/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/js/plugins/isotope.pkgd.min.js"></script>
-<script type="text/javascript" src="/js/vendor/swiper.jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/js-image-slider.js"></script>
-<script type="text/javascript" src="/js/plugins.js"></script>
-<script type="text/javascript" src="/js/main.js"></script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-598031cd26769c67"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -261,7 +133,7 @@
     $('.menu  ul.normal li').hover(function () {
         var detail = $(this).find('.detail-info').html();
         $(this).closest('.row').find('.col-xs-8').html(detail);
-    }); a
+    });
 
     $('.btn-subcribe').click(function () {
         if ($(".txt-email").val() === "") {
@@ -289,89 +161,11 @@
             .fail(function () {
                 alert(FAIL_MSG);
             });
-
     });
 
-</script>
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        PageFunction.pageAbout();
-    });
-</script>
-
-
-<script type="text/template" id="news-item-template">
-    <div class="col-xs-4">
-        <div class="item-news">
-            <div><img src="{Image}" alt="{Title}" title="{Title}" /></div>
-            <div class="link mt10">{Title}</div>
-            <div class="mt10">{Description}</div>
-            <a href="{Link}" title="{Title}" class="link-full"></a>
-        </div>
-    </div>
 </script>
 
 <script type="text/javascript">
-    var ajax_url_news = '/pagecontent/getmoredata';
-    var ajax_url_search = '/search/getmoredata';
-
-    $(document).ready(function () {
-        $('.search-load-more .load-more-news').click(function () {
-            var lastItem = $('.news-item-container .col-xs-4:last');
-            var page = $('#news-page').val();
-            var keyword = $('#keyword-key').val();
-            var tag = $('#tag-key').val();
-            $.get(ajax_url_search, { page: page, language: language, domain: domain, keyword: keyword, tag: tag })
-                .done(function (data) {
-                    var template = $('#item-template').html();
-                    var html = '';
-                    $.each(data.Items,
-                        function (i, v) {
-                            html += template.replace(/{Title}/g, v.Title)
-                                .replace(/{Image}/g, v.Image + "?width=270&height=300&mode=crop")
-                                .replace(/{Link}/g, v.Link)
-                                .replace(/{Description}/g, v.Description);
-                        });
-                    var $newels = $(html);
-                    lastItem.after($newels);
-                    $('#news-page').val(data.Page);
-                    if ((data.Page * data.PageSize) >= data.TotalRows) {
-                        $('.load-more-news').hide();
-                    }
-                });
-        });
-
-        $('.load-more-news').click(function () {
-            if ($(this).parent().hasClass('search-load-more')) {
-                return;
-            }
-            var lastItem = $('.news-item-container .col-xs-4:last');
-            var page = $('#news-page').val();
-            var pageId = $('#news-page-id').val();
-            $.get(ajax_url_news, { page: page, pageId: pageId, language: language, domain: domain })
-                .done(function (data) {
-                    var template = $('#item-template').html();
-                    var html = '';
-                    $.each(data.Items,
-                        function (i, v) {
-                            html += template.replace(/{Title}/g, v.Title)
-                                .replace(/{Image}/g, v.Image + "?width=270&height=300&mode=crop")
-                                .replace(/{Link}/g, v.Link)
-                                .replace(/{Description}/g, v.Description);
-                        });
-                    var $newels = $(html);
-                    lastItem.after($newels);
-                    $('#news-page').val(data.Page);
-                    if ((data.Page * data.PageSize) >= data.TotalRows) {
-                        $('.load-more-news').hide();
-                    }
-                });
-        });
-
-    });
-
     $('.submit-form').click(function () {
         $(this).closest('form').submit();
     });
@@ -390,16 +184,6 @@
         if (count > 0) {
             e.preventDefault();
         }
-    });
-
-    $('form .btnSearch').click(function (e) {
-        var keyword = $(this).closest('form').find('input[type=text]');
-        if ($(keyword).val() == '' || $(keyword).val() == null) {
-            $(keyword).focus();
-            e.preventDefault();
-            return;
-        }
-        $(this).closest('form').submit();
     });
 
 </script>

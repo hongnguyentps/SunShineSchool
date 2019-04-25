@@ -8,9 +8,18 @@ namespace WebApplication2.POCO
 {
     public class LopGV
     {
-        public string UserId { get; set; }
-        public int LopId { get; set; }
+        public int Id { get; set; }
+        
+        public string LopId { get; set; }
+
         public Lop Lop { get; set; }
-        public ApplicationUser User { get; set; }
+
+        public string MonHocId { get; set; }
+
+        public MonHoc MonHoc { get; set; }
+
+        public string GVBMId { get; set; }
+
+        public NguoiDung GVBM { get; set; }
     }
 }

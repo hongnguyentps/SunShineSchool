@@ -14,6 +14,6 @@ namespace WebApplication2.POCO
         public string TenDiem { get; set; }
         public string GhiChu { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public NguoiDung MaHS { get; set; }
     }
 }

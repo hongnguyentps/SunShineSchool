@@ -1,0 +1,129 @@
+﻿@model IQueryable<WebApplication2.POCO.NguoiDung>
+
+@{
+    ViewData["Title"] = "ThongTinChiTiet";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>ThongTinChiTiet</h2>
+
+@using (Html.BeginForm("XemThongTinHS", "StudentManagement", FormMethod.Post))
+{
+    <div class="page-container">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Thêm Học Sinh</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">Mã Học Sinh</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                @Model.GetEnumerator().Current.MaNgDung
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label class=" form-control-label">Họ</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    @Model.GetEnumerator().Current.Ho
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Tên</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    @Model.GetEnumerator().Current.Ten
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Giới tính</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    @Model.GetEnumerator().Current.GioiTinh
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Ngày sinh</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    @Model.GetEnumerator().Current.NgaySinh
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Nơi Sinh</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    @Model.GetEnumerator().Current.NoiSinh
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Dân tộc</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    @Model.GetEnumerator().Current.DanToc
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Tôn Giáo</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    @Model.GetEnumerator().Current.TonGiao
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">SDT</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    @Model.GetEnumerator().Current.SDT
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="email-input" class=" form-control-label">Email</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    @Model.GetEnumerator().Current.Email
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="email-input" class=" form-control-label">Họ Tên Cha</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    @Model.GetEnumerator().Current.HoTenCha
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="textarea-input" class=" form-control-label">Ghi chú</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Submit
+                            </button>
+                            <button type="reset" class="btn btn-danger btn-sm">
+                                <i class="fa fa-ban"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

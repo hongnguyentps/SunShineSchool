@@ -1,7 +1,78 @@
-﻿
+﻿@model ReflectionIT.Mvc.Paging.PagingList<WebApplication2.POCO.NguoiDung>
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
 @{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Index";
+    int pageNumber = ViewBag.Page;
+    int pageSize = ViewBag.PageSize;
+    var index = (pageNumber - 1) * pageSize + 1;
 }
 
-<h2>Index</h2>
+<title>Danh sách học sinh</title>
+<div class="page-container">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="main-content">
+                <form asp-action="Index" class="d-flex justify-content-between" action="" method="POST">
+                    <div class="form-group form-header">
+                        <input class="form-control-lg" style="width: 500px;" type="text" name="SearchString" value="@Model.RouteValue["SearchString"]" placeholder="Tìm kiếm theo họ, tên..." />
+                        <button class="au-btn--submit" type="submit">
+                            <i class="zmdi zmdi-search"></i>
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <a href="/admin/StudentManagement/ThemHS" class="au-btn au-btn-icon au-btn--blue">
+                            <i class="zmdi zmdi-plus"></i>Thêm Học Sinh
+                        </a>
+                    </div>
+                </form>
 
+                <div class="table-responsive table--no-card m-b-30">
+                    <table class="table table-borderless table-striped table-earning">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã HS</th>
+                                <th>Họ </th>
+                                <th>Tên</th>
+                                <th>Lớp</th>
+                                <th>Giới Tính</th>
+                                <th>Ngày Sinh</th>
+                                <th>Quê Quán</th>
+                                <th>Dân Tộc</th>
+                                <th>Tôn Giáo</th>
+                                <th>Địa Chỉ</th>
+                                <th>SDT</th>
+                                <th>Ghi Chú</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>@(index++)</td>
+                                    <td>@user.MaNgDung</td>
+                                    <td>@user.Ho</td>
+                                    <td>@user.Ten</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <nav aria-label="navigation">
+                    <vc:pager paging-list="@Model" />
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

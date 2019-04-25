@@ -12,6 +12,12 @@
     <Compile Remove="Data\Migrations\20190401073903_customuser.Designer.cs" />
     <Compile Remove="Data\Migrations\20190401113849_changename.cs" />
     <Compile Remove="Data\Migrations\20190401113849_changename.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190415115517_ChangeDB001.cs" />
+    <Compile Remove="Data\Migrations\20190415120208_ChangeDB001.cs" />
+    <Compile Remove="Data\Migrations\20190417101550_ChangeDB003.cs" />
+    <Compile Remove="Data\Migrations\20190417171403_ChangeDB004.cs" />
+    <Compile Remove="Migrations\20190423121441_ChangeDB005.cs" />
+    <Compile Remove="PaginatedList.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,11 +31,13 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="ReflectionIT.Mvc.Paging" Version="3.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Assets\Admin\" />
   </ItemGroup>
 

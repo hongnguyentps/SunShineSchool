@@ -140,12 +140,8 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("Cmnd");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<string>("DanToc");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -154,9 +150,13 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<string>("GhiChu");
 
+                    b.Property<string>("Ho");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NguoiDungId");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -170,9 +170,11 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<string>("Role");
+
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<string>("TonGiao");
+                    b.Property<string>("Ten");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -180,6 +182,10 @@ namespace WebApplication2.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NguoiDungId")
+                        .IsUnique()
+                        .HasFilter("[NguoiDungId] IS NOT NULL");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -202,60 +208,178 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<string>("GhiChu");
 
-                    b.Property<int>("IdHeSo");
+                    b.Property<string>("HocKyMaHKy");
 
-                    b.Property<int>("IdMH");
+                    b.Property<string>("LoaiDiemId");
+
+                    b.Property<string>("LopId");
+
+                    b.Property<string>("MonHocMaMH");
 
                     b.Property<string>("UserId");
 
                     b.HasKey("DiemId");
+
+                    b.HasIndex("HocKyMaHKy");
+
+                    b.HasIndex("LoaiDiemId");
+
+                    b.HasIndex("LopId");
+
+                    b.HasIndex("MonHocMaMH");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Diems");
                 });
 
-            modelBuilder.Entity("WebApplication2.POCO.LoaiDiem", b =>
+            modelBuilder.Entity("WebApplication2.POCO.HanhKiem", b =>
+                {
+                    b.Property<string>("MaHK")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("TenHK");
+
+                    b.HasKey("MaHK");
+
+                    b.ToTable("HanhKiems");
+                });
+
+            modelBuilder.Entity("WebApplication2.POCO.HocKy", b =>
+                {
+                    b.Property<string>("MaHKy")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("TenHKy");
+
+                    b.HasKey("MaHKy");
+
+                    b.ToTable("HocKys");
+                });
+
+            modelBuilder.Entity("WebApplication2.POCO.HocLuc", b =>
+                {
+                    b.Property<string>("MaHL")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DiemCanDuoi");
+
+                    b.Property<string>("DiemCanTren");
+
+                    b.Property<string>("DiemKhongChe");
+
+                    b.Property<string>("TenHL");
+
+                    b.HasKey("MaHL");
+
+                    b.ToTable("HocLucs");
+                });
+
+            modelBuilder.Entity("WebApplication2.POCO.KetQua", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId");
+                    b.Property<string>("HanhKiemMaHK");
 
-                    b.Property<string>("GhiChu");
+                    b.Property<string>("HocLucMaHL");
 
-                    b.Property<int>("GiaTri");
+                    b.Property<string>("LopId");
 
-                    b.Property<string>("TenDiem");
+                    b.Property<string>("MaHSMaNgDung");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("HanhKiemMaHK");
+
+                    b.HasIndex("HocLucMaHL");
+
+                    b.HasIndex("LopId");
+
+                    b.HasIndex("MaHSMaNgDung");
+
+                    b.ToTable("KetQuas");
+                });
+
+            modelBuilder.Entity("WebApplication2.POCO.Khoi", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("TenKhoi");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Khois");
+                });
+
+            modelBuilder.Entity("WebApplication2.POCO.LoaiDiem", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("HeSo");
+
+                    b.Property<string>("TenLoai");
+
+                    b.HasKey("Id");
 
                     b.ToTable("LoaiDiems");
                 });
 
             modelBuilder.Entity("WebApplication2.POCO.Lop", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("GVCNId");
 
                     b.Property<string>("Ghichu");
 
-                    b.Property<string>("NienKhoa");
+                    b.Property<string>("KhoiId");
+
+                    b.Property<string>("NienKhoaId");
 
                     b.Property<string>("TenLop");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GVCNId");
+
+                    b.HasIndex("KhoiId");
+
+                    b.HasIndex("NienKhoaId");
 
                     b.ToTable("Lops");
                 });
 
             modelBuilder.Entity("WebApplication2.POCO.LopGV", b =>
                 {
-                    b.Property<int>("LopId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("GVBMId");
+
+                    b.Property<string>("LopId");
+
+                    b.Property<string>("MonHocId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GVBMId");
+
+                    b.HasIndex("LopId");
+
+                    b.HasIndex("MonHocId");
+
+                    b.ToTable("LopGvs");
+                });
+
+            modelBuilder.Entity("WebApplication2.POCO.LopHS", b =>
+                {
+                    b.Property<string>("LopId");
 
                     b.Property<string>("UserId");
 
@@ -263,35 +387,75 @@ namespace WebApplication2.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("LopGvs");
+                    b.ToTable("LopHss");
                 });
 
-            modelBuilder.Entity("WebApplication2.POCO.MonHoc_User", b =>
+            modelBuilder.Entity("WebApplication2.POCO.MonHoc", b =>
                 {
-                    b.Property<int>("IdMH");
+                    b.Property<string>("MaMH")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("MoTa");
 
-                    b.HasKey("IdMH", "UserId");
+                    b.Property<int>("SoTiet");
 
-                    b.HasIndex("UserId");
+                    b.Property<string>("TenMonHoc");
 
-                    b.ToTable("MonHocUsers");
+                    b.HasKey("MaMH");
+
+                    b.ToTable("MonHocs");
                 });
 
-            modelBuilder.Entity("WebApplication2.POCO.Subject", b =>
+            modelBuilder.Entity("WebApplication2.POCO.NguoiDung", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("MaNgDung")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Description");
+                    b.Property<int>("Cmnd");
 
-                    b.Property<string>("SubjectName");
+                    b.Property<string>("DanToc");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Email");
 
-                    b.ToTable("Subjects");
+                    b.Property<string>("GhiChu");
+
+                    b.Property<string>("GioiTinh");
+
+                    b.Property<string>("HinhThe");
+
+                    b.Property<string>("Ho");
+
+                    b.Property<string>("HoTenCha");
+
+                    b.Property<string>("HoTenMe");
+
+                    b.Property<DateTime>("NgaySinh");
+
+                    b.Property<string>("NoiSinh");
+
+                    b.Property<int>("SDT");
+
+                    b.Property<string>("Ten");
+
+                    b.Property<string>("TonGiao");
+
+                    b.Property<bool>("isGV");
+
+                    b.HasKey("MaNgDung");
+
+                    b.ToTable("NguoiDungs");
+                });
+
+            modelBuilder.Entity("WebApplication2.POCO.NienKhoa", b =>
+                {
+                    b.Property<string>("NienKhoaId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("TenNK");
+
+                    b.HasKey("NienKhoaId");
+
+                    b.ToTable("NienKhoas");
                 });
 
             modelBuilder.Entity("WebApplication2.POCO.ViPham", b =>
@@ -302,6 +466,8 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<string>("GhiChu");
 
+                    b.Property<string>("MaHSMaNgDung");
+
                     b.Property<string>("TenDiem");
 
                     b.Property<string>("TenLoi");
@@ -310,7 +476,7 @@ namespace WebApplication2.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("MaHSMaNgDung");
 
                     b.ToTable("ViPhams");
                 });
@@ -360,51 +526,103 @@ namespace WebApplication2.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("WebApplication2.Data.ApplicationUser", b =>
+                {
+                    b.HasOne("WebApplication2.POCO.NguoiDung", "NguoiDung")
+                        .WithOne("Account")
+                        .HasForeignKey("WebApplication2.Data.ApplicationUser", "NguoiDungId");
+                });
+
             modelBuilder.Entity("WebApplication2.POCO.Diem", b =>
                 {
-                    b.HasOne("WebApplication2.Data.ApplicationUser", "User")
+                    b.HasOne("WebApplication2.POCO.HocKy", "HocKy")
+                        .WithMany("Diems")
+                        .HasForeignKey("HocKyMaHKy");
+
+                    b.HasOne("WebApplication2.POCO.LoaiDiem", "LoaiDiem")
+                        .WithMany("Diems")
+                        .HasForeignKey("LoaiDiemId");
+
+                    b.HasOne("WebApplication2.POCO.Lop", "Lop")
+                        .WithMany("Diems")
+                        .HasForeignKey("LopId");
+
+                    b.HasOne("WebApplication2.POCO.MonHoc", "MonHoc")
+                        .WithMany("Diems")
+                        .HasForeignKey("MonHocMaMH");
+
+                    b.HasOne("WebApplication2.POCO.NguoiDung", "User")
                         .WithMany("DiemIds")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("WebApplication2.POCO.LoaiDiem", b =>
+            modelBuilder.Entity("WebApplication2.POCO.KetQua", b =>
                 {
-                    b.HasOne("WebApplication2.Data.ApplicationUser")
-                        .WithMany("LoaiDiems")
-                        .HasForeignKey("ApplicationUserId");
+                    b.HasOne("WebApplication2.POCO.HanhKiem", "HanhKiem")
+                        .WithMany("KetQuas")
+                        .HasForeignKey("HanhKiemMaHK");
+
+                    b.HasOne("WebApplication2.POCO.HocLuc", "HocLuc")
+                        .WithMany("KetQuas")
+                        .HasForeignKey("HocLucMaHL");
+
+                    b.HasOne("WebApplication2.POCO.Lop", "Lop")
+                        .WithMany("KetQuas")
+                        .HasForeignKey("LopId");
+
+                    b.HasOne("WebApplication2.POCO.NguoiDung", "MaHS")
+                        .WithMany("KetQuas")
+                        .HasForeignKey("MaHSMaNgDung");
+                });
+
+            modelBuilder.Entity("WebApplication2.POCO.Lop", b =>
+                {
+                    b.HasOne("WebApplication2.POCO.NguoiDung", "GVCN")
+                        .WithMany("Lops")
+                        .HasForeignKey("GVCNId");
+
+                    b.HasOne("WebApplication2.POCO.Khoi", "Khoi")
+                        .WithMany("Lops")
+                        .HasForeignKey("KhoiId");
+
+                    b.HasOne("WebApplication2.POCO.NienKhoa", "NienKhoa")
+                        .WithMany("Lops")
+                        .HasForeignKey("NienKhoaId");
                 });
 
             modelBuilder.Entity("WebApplication2.POCO.LopGV", b =>
                 {
-                    b.HasOne("WebApplication2.POCO.Lop", "Lop")
+                    b.HasOne("WebApplication2.POCO.NguoiDung", "GVBM")
                         .WithMany("LopGvs")
+                        .HasForeignKey("GVBMId");
+
+                    b.HasOne("WebApplication2.POCO.Lop", "Lop")
+                        .WithMany("LopGVs")
+                        .HasForeignKey("LopId");
+
+                    b.HasOne("WebApplication2.POCO.MonHoc", "MonHoc")
+                        .WithMany()
+                        .HasForeignKey("MonHocId");
+                });
+
+            modelBuilder.Entity("WebApplication2.POCO.LopHS", b =>
+                {
+                    b.HasOne("WebApplication2.POCO.Lop", "Lop")
+                        .WithMany("LopHss")
                         .HasForeignKey("LopId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("WebApplication2.Data.ApplicationUser", "User")
-                        .WithMany("LopGvs")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WebApplication2.POCO.MonHoc_User", b =>
-                {
-                    b.HasOne("WebApplication2.POCO.Subject", "Subject")
-                        .WithMany("MonHocUsers")
-                        .HasForeignKey("IdMH")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("WebApplication2.Data.ApplicationUser", "User")
-                        .WithMany("MonHocUsers")
+                    b.HasOne("WebApplication2.POCO.NguoiDung", "User")
+                        .WithMany("LopHss")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("WebApplication2.POCO.ViPham", b =>
                 {
-                    b.HasOne("WebApplication2.Data.ApplicationUser", "User")
+                    b.HasOne("WebApplication2.POCO.NguoiDung", "MaHS")
                         .WithMany("ViPhams")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("MaHSMaNgDung");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,7 +11,7 @@ namespace WebApplication2.Areas.Admin
     {
         public IActionResult Index()
         {
-            return View();
+            return Redirect("/admin/Account");
         }
     }
 }

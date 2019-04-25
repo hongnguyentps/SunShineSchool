@@ -1,0 +1,64 @@
+﻿@model List<WebApplication2.Data.ApplicationUser>
+@{
+    ViewData["Title"] = "ShowAccount";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var index = 1;
+}
+<title>Quản lý Tài Khoản</title>
+@using (Html.BeginForm("Index", "Account"))
+{
+    <div class="page-container">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="main-content">
+                    
+                    <div class="form-group col-lg-4">
+                        <label>Role</label>
+                        @Html.DropDownList("role", (IEnumerable<SelectListItem>) ViewBag.AllRole, new {@class = "string form-control", @id = "role"})
+                    </div>
+                    <div class="form-group col-lg-2">
+                        <button type="submit" class="btn-outline-danger form-control" id="submit">SEARCH</button>
+                    </div>
+                    <div class="table-responsive table--no-card m-b-30">
+                        <table class="table table-borderless table-striped table-earning">
+                            <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Họ  Tên</th>
+                                <th>Tên Đăng Nhập</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@(index++)</td>
+                                    <td>@(item.Ho + " " + item.Ten)</td>
+                                    <td>@item.UserName</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.Role</td>
+                                    <td>
+                                        <div class="table-data-feature">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </button>
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

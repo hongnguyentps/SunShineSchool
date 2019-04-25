@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@model List<WebApplication2.Models.LopViewModel>
+
+@using (Html.BeginForm("index", "Lop"))
+{
+    <div class="page-container">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="main-content">
+                    <div class="form-group col-lg-4 ">
+                        <label>Danh Sách Các Khối</label>
+                        @Html.DropDownList("khoi", (IEnumerable<SelectListItem>) ViewBag.AllKhoi, new {@class = "string form-control", @id = "khoi"})
+                    </div>
+                    <div class="form-group col-lg-4 ">
+                        <label>Niên Khóa</label>
+                        @Html.DropDownList("nienkhoa", (IEnumerable<SelectListItem>) ViewBag.AllNK, new {@class = "string form-control", @id = "nienkhoa"})
+                    </div>
+
+                    <div class="form-group col-lg-2">
+                        <label>&nbsp;</label>
+                        <button type="submit" class="btn-outline-danger form-control" id="submit">SEARCH</button>
+                    </div>
+                    <div class="table-responsive table--no-card m-b-30">
+                        <table class="table table-borderless table-striped table-earning">
+                            <thead>
+                            <tr>
+                                <th>Mã Lớp</th>
+                                <th>Tên Lớp</th>
+                                <th>Niên Khóa</th>
+                                <th>GVCN</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.LopId</td>
+                                    <td>@item.TenLop</td>
+                                    <td>@item.NienKhoa</td>
+                                    <td>@item.TenGiaoVien</td>
+                                    <td>@Html.ActionLink("Xem Danh Sách Học Sinh", "XemDSTheoLop", "Lop", new {id = item.LopId}, null)</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

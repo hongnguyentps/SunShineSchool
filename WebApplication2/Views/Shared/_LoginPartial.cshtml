@@ -6,21 +6,23 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav justify-content: center;">
-            <li>
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm">
+        <div>
+            <span>
                 <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-            </li>
-            <li>
+            </span>
+            <span>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
-            </li>
-        </ul>
+            </span>
+        </div>
     </form>
 }
 else
 {
-    <ul class="nav navbar-nav">
-        <li><a asp-area="Identity" asp-page="/Account/Register">Đăng Ký</a></li>
-        <li><a asp-area="Identity" asp-page="/Account/Login">Đăng Nhập</a></li>
-    </ul>
+    <div>
+        <span style="padding-right: 20px;"><a asp-area="Identity" asp-page="/Account/Register">Đăng Ký</a></span>
+        <span>
+            <a asp-area="Identity" asp-page="/Account/Login">Đăng Nhập</a>
+        </span>
+    </div>
 }

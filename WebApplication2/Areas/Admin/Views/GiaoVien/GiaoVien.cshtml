@@ -1,0 +1,72 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<WebApplication2.POCO.NguoiDung>
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+@{
+    ViewData["Title"] = "GiaoVien";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int pageNumber = ViewBag.Page;
+    int pageSize = ViewBag.PageSize;
+    var index = (pageNumber - 1) * pageSize + 1;
+}
+
+
+<title>Quản Lý Giáo Viên</title>
+<div class="page-container">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="main-content">
+                <form asp-action="Index" class="d-flex justify-content-between" action="" method="POST">
+                    <div class="form-group form-header">
+                        <input class="form-control-lg" style="width: 500px;" type="text" name="SearchString" value="@Model.RouteValue["SearchString"]" placeholder="Tìm kiếm theo họ, tên..." />
+                        <button class="au-btn--submit" type="submit">
+                            <i class="zmdi zmdi-search"></i>
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <a href="/admin/StudentManagement/ThemHS" class="au-btn au-btn-icon au-btn--blue">
+                            <i class="zmdi zmdi-plus"></i>Thêm Giáo Viên
+                        </a>
+                    </div>
+                </form>
+                <div class="table-responsive table--no-card m-b-30">
+                    <table class="table table-borderless table-striped table-earning">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã GV</th>
+                                <th>Họ </th>
+                                <th>Tên</th>
+                                <th>Bộ Môn</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@(index++)</td>
+                                    <td>@item.MaNgDung</td>
+                                    <td>@item.Ho</td>
+                                    <td>@item.Ten</td>
+                                    <td></td>
+                                    <td>@Html.ActionLink("Xem Thông Tin Chi Tiết", "Index", "GiaoVien", new { id = item.MaNgDung }, null)</td>
+                                    <td>
+                                        <div class="table-data-feature">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <nav aria-label="Suppliers navigation example">
+                    <vc:pager paging-list="@Model" />
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

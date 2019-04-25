@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "XemDSTheoLop";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var index = 1;
+}
+
+@model List<WebApplication2.POCO.LopHS>
+
+<title>Danh Sách Lớp</title>
+
+<div class="page-container">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="main-content">
+
+                <div class="table-responsive table--no-card m-b-30">
+                    <table class="table table-borderless table-striped table-earning">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã HS</th>
+                                <th>Họ </th>
+                                <th>Tên</th>
+                                <th>Lớp</th>
+                                <th>Giới Tính</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@(index++)</td>
+                                    <td>@item.UserId</td>
+                                    <td>@item.User.Ho</td>
+                                    <td>@item.User.Ten</td>
+                                    <td>@item.Lop.TenLop</td>
+                                    <td>@item.User.GioiTinh</td>
+                                    <td>@Html.ActionLink("Kết Quả Học Tập", "ThongTinHS", "StudentManagement", new { id = item.UserId }, null)</td>
+                                    <td>@Html.ActionLink("Thông Tin Chi Tiết", "XemThongTinHS", "StudentManagement", new { id = item.UserId }, null)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

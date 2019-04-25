@@ -8,21 +8,24 @@ using WebApplication2.Data;
 
 namespace WebApplication2.POCO
 {
-    public class Diem 
+    public class Diem
     {
-
         public int DiemId { get; set; }
 
         public double DiemSo { get; set; }
 
-        public int IdMH { get; set; }
-        
         public string UserId { get; set; }
 
-        public int IdHeSo { get; set; }
+        public NguoiDung User { get; set; }
+
+        public Lop Lop { get; set; }
+
+        public MonHoc MonHoc { get; set; }
+
+        public HocKy HocKy { get; set; }
+
+        public LoaiDiem LoaiDiem { get; set; }
 
         public string GhiChu { get; set; }
-
-        public ApplicationUser User { get; set; } 
     }
 }
