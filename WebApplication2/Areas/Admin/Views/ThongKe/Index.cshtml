@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "ThongKe";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+@model WebApplication2.Areas.BaoCaoThongKe
+<title>Báo Cáo Thống Kê</title>
+@using (Html.BeginForm("index", "ThongKe"))
+{
+    <div class="page-container">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="main-content">
+
+                    <div class="au-card-inner">
+                        <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                            <div class="chartjs-size-monitor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                <div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0">
+                                </div>
+                            </div>
+                            <div class="chartjs-size-monitor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                <div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
+                            </div>
+                        </div>
+                        <h3 class="title-2 m-b-40">Thống Kê Học Sinh Theo Học Lực</h3>
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label>Danh Sách Các Khối</label>
+                                    @Html.DropDownList("khoi", (IEnumerable<SelectListItem>)ViewBag.AllKhoi, new { @class = "string form-control", @id = "khoi" })
+                                </div>
+                                <div class="form-group">
+                                    <label>Niên Khóa</label>
+                                    @Html.DropDownList("nienkhoa", (IEnumerable<SelectListItem>)ViewBag.AllNK, new { @class = "string form-control", @id = "nienkhoa" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <button type="submit" class="btn-outline-danger form-control" id="submit">SEARCH</button>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script>
+    new Chart(document.getElementById("myChart"),
+        {
+            "type": "doughnut", "data":
+            {
+                "labels": ["Giỏi", "Khá", "Trung Bình", "Yếu"],
+                "datasets": [{
+                    "label": "My First Dataset",
+                    "data": [@Model.SLHSGioi, @Model.SLHSKha, @Model.SLHSTB, @Model.SLHSYeu],
+                    "backgroundColor": ["rgb(255, 205, 86)", "rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(101, 96, 99)"]
+                }]
+            }
+        });
+</script>

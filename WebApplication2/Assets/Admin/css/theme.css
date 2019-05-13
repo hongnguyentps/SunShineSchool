@@ -4243,7 +4243,8 @@ section {
     }
 
 .table-earning tbody td {
-    color: #808080;
+    color: #403e3e;
+    font-weight: 600;
     padding: 12px 40px;
     white-space: nowrap;
 }
@@ -14645,7 +14646,15 @@ section {
     color: #808080;
     border-radius: 3px;
     height: 40px;
-    padding-left: 18px;
+    padding-left: 15px;
+    width: 80px;
+    font-size: 18px;
+    margin-right: 70px;
+}
+
+.hocky {
+    float: right;
+    margin-bottom: 20px;
 }
 
 .pagination {
@@ -14680,3 +14689,40 @@ section {
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
     }
+
+.background-table {
+    background-color: #fff;
+}
+
+.inputdiem {
+    background-color: lightblue;
+    width: 30px;
+}
+
+.btn-nhapdiem {
+    color: #212529;
+    background-color: #ffe307d6;
+    border-color: #f8f9fa;
+    margin-right: 10px;
+    font-weight: 600;
+}
+
+.addDM, .add15p, .add1T, .addGK, .addCK {
+    float: right;
+}
+
+.tieude {
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 700;
+    color: #1265be;
+}
+
+.ketqua {
+    font-family: sans-serif;
+    font-weight: 600;
+    margin-left: 20px;
+    margin-top: 20px;
+    color: #000;
+}
+

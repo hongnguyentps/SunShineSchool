@@ -9,9 +9,14 @@ namespace WebApplication2.POCO
     public class MonHoc
     {
         public string MaMH { get; set; }
+
         public string TenMonHoc { get; set; }
+
         public int SoTiet { get; set; }
+
         public string MoTa { get; set; }
+
+        public string GhiChu { get; set; }
 
         public ICollection<Diem> Diems { get; set; }
     }

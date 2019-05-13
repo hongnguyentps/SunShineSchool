@@ -31,3 +31,44 @@ for details on configuring this project to bundle and minify static web assets. 
         display: none;
     }
 }
+
+.tieu-de {
+    padding-bottom: 20px;
+    color: #000;
+    text-align: center;
+}
+
+.ketqua {
+    font-size: 17px;
+    font-family: sans-serif;
+    font-weight: 600;
+    margin-top: 20px;
+    color: #000;
+}
+
+.hocky {
+    float: right;
+    margin-bottom: 20px;
+    margin-right: 80px;
+    height: 35px;
+}
+
+.dropdown-item {
+    background-color: #fff;
+}
+
+.indam {
+    font-weight: 600;
+}
+
+.table {
+     font-size: 17px;
+}
+
+.table > thead > tr > th {
+    padding: 12px !important;
+}
+
+.a-fff {
+    color: #fff;
+}

@@ -38,8 +38,8 @@
                                     <td>@item.User.Ten</td>
                                     <td>@item.Lop.TenLop</td>
                                     <td>@item.User.GioiTinh</td>
-                                    <td>@Html.ActionLink("Kết Quả Học Tập", "ThongTinHS", "StudentManagement", new { id = item.UserId }, null)</td>
-                                    <td>@Html.ActionLink("Thông Tin Chi Tiết", "XemThongTinHS", "StudentManagement", new { id = item.UserId }, null)</td>
+                                    <td>@Html.ActionLink("Kết Quả Học Tập", "DiemSo", "StudentManagement", new { UserId = item.UserId }, null)</td>
+                                    <td>@Html.ActionLink("Thông Tin Chi Tiết", "XemThongTinHS", "StudentManagement", new { UserId = item.UserId })</td>
                                 </tr>
                             }
                         </tbody>

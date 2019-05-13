@@ -1,0 +1,251 @@
+﻿@{
+    ViewData["Title"] = "NhapDiem";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var index = 1;
+}
+
+@model WebApplication2.DTO.LayDanhSachLopForDiemDto
+<title>Nhập Điểm</title>
+@Html.HiddenFor(x => Model.GVBMId)
+@Html.HiddenFor(x => Model.MonHocId)
+@Html.HiddenFor(x => Model.LopId)
+<div class="page-container">
+    <div class="section__content section__content--p30">
+        <div>
+            <div class="main-content">
+                <select id="hocky" class="combo-box form-group">
+                    <option value="HK1">HK1</option>
+                    <option value="HK2">HK2</option>
+                </select>
+                <div class="float-lg-right">
+                    <button class="btn btn-info mr-2" id="tinhDiem">Tính Điểm TB</button>
+                    <button class="btn btn-nhapdiem" onclick="InputKTMieng()">Nhập Điểm Miệng</button>
+                    <button class="btn btn-nhapdiem" onclick="InputKT15P()">Nhập Điểm 15p</button>
+                    <button class="btn btn-nhapdiem" onclick="InputKT1T()">Nhập Điểm 1 Tiết</button>
+                    <button class="btn btn-nhapdiem" onclick="InputKTGK()">Nhập Điểm Giữa Kỳ</button>
+                    <button class="btn btn-nhapdiem" onclick="InputKTCK()">Nhập Điểm Cuối Kỳ</button>
+                </div>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã HS</th>
+                            <th>Họ </th>
+                            <th>Tên</th>
+                            <th>Giới Tính</th>
+                            <th>Ngày Sinh</th>
+                            <th>Miệng</th>
+                            <th>15p</th>
+                            <th>1 Tiết</th>
+                            <th>Giữa kỳ</th>
+                            <th>Cuối kỳ</th>
+                            <th>ĐTB</th>
+                            <th>Xếp loại</th>
+                        </tr>
+                    </thead>
+                    <tbody class="background-table" id="table-nhapdiem">
+                        @foreach (var item in Model.DiemCaNhans)
+                        {
+                            <tr>
+                                <td style="width: 50px;">@(index++)</td>
+                                <td style="width: 90px;">@item.MaNgDung</td>
+                                <td style="width: 180px;">@item.Ho</td>
+                                <td>@item.Ten</td>
+                                <td style="width: 100px;">@item.GioiTinh</td>
+                                <td style="width: 115px;">@item.NgaySinh.ToShortDateString()</td>
+                                <td style="width: 180px">
+                                    <div>
+                                        @if (item.DiemMiengs.Count == 0)
+                                        {
+                                            <span class="addDM" onclick="ThemDiem(this);">
+                                                <i class="fa fa-plus-circle"></i>
+                                            </span>
+                                            <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0001" type="number" min="0" max="10" step="0.25" class="inputmieng" />
+                                        }
+                                        else
+                                        {
+                                            foreach (var itemDiemMieng in item.DiemMiengs)
+                                            {
+                                                <input style="width: 40px" data-DiemId="@itemDiemMieng.DiemId" value="@itemDiemMieng.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0001" type="number" min="0" max="10" step="0.25" class="inputmieng" />
+                                            }
+
+                                             if (item.DiemMiengs.Count < 3)
+                                             {
+                                                 <span class="addDM" onclick="ThemDiem(this);">
+                                                     <i class="fa fa-plus-circle"></i>
+                                                 </span>
+                                             }
+
+                                            <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0001" type="number" min="0" max="10" step="0.25" class="inputmieng" />
+                                        }
+                                    </div>
+                                </td>
+                                <td style="width: 120px;">
+                                    @if (item.Diem15ps.Count == 0)
+                                    {
+                                        <span class="add15p" onclick="ThemDiem(this);">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </span>
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0002" type="number" min="0" max="10" step="0.25" class="input15p" />
+                                    }
+                                    else
+                                    {
+                                        foreach (var itemDiem15p in item.Diem15ps)
+                                        {
+                                            <input style="width: 40px" data-DiemId="@itemDiem15p.DiemId" value="@itemDiem15p.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0002" type="number" min="0" max="10" step="0.25" class="input15p" />
+                                        }
+                                        <span class="add15p" onclick="ThemDiem(this);">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </span>
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0002" type="number" min="0" max="10" step="0.25" class="input15p" />
+                                    }
+                                </td>
+                                <td style="width: 120px;">
+                                    @if (item.Diem1Tiets.Count == 0)
+                                    {
+                                        <span class="add1T" onclick="ThemDiem(this);">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </span>
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0003" type="number" min="0" max="10" step="0.25" class="input1T" style="display: inline; width: 40px;" />
+                                    }
+                                    else
+                                    {
+                                        foreach (var itemDiem1Tiet in item.Diem1Tiets)
+                                        {
+                                            <input style="width: 40px" data-DiemId="@itemDiem1Tiet.DiemId" value="@itemDiem1Tiet.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0003" type="number" min="0" max="10" step="0.25" class="input1T" />
+                                        }
+                                        <span class="add1T" onclick="ThemDiem(this);">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </span>
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0003" type="number" min="0" max="10" step="0.25" class="input1T" />
+                                    }
+                                </td>
+                                <td style="width: 120px;">
+                                    @if (item.DiemGiuaKys.Count == 0)
+                                    {
+                                        <span class="addGK" onclick="ThemDiem(this);">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </span>
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0004" type="number" min="0" max="10" step="0.25" class="inputGK" style="display: inline; width: 40px;" />
+                                    }
+                                    else
+                                    {
+                                        foreach (var itemDiemGiuaKy in item.DiemGiuaKys)
+                                        {
+                                            <input style="width: 40px" data-DiemId="@itemDiemGiuaKy.DiemId" value="@itemDiemGiuaKy.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0004" type="number" min="0" max="10" step="0.25" class="inputGK" />
+                                        }
+                                        <span class="addGK" onclick="ThemDiem(this);">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </span>
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0004" type="number" min="0" max="10" step="0.25" class="inputGK" />
+                                    }
+                                </td>
+                                <td style="width: 120px;">
+                                    @if (item.DiemCuoiKys.Count == 0)
+                                    {
+                                        <span class="addCK" onclick="ThemDiem(this);">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </span>
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0005" type="number" min="0" max="10" step="0.25" class="inputCK"  style="display: inline; width: 40px;"/>
+                                    }
+                                    else
+                                    {
+                                        foreach (var itemDiemCuoiKy in item.DiemCuoiKys)
+                                        {
+                                            <input style="width: 40px" data-DiemId="@itemDiemCuoiKy.DiemId" value="@itemDiemCuoiKy.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0005" type="number" min="0" max="10" step="0.25" class="inputCK" />
+                                        }
+                                        <span class="addCK" onclick="ThemDiem(this);">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </span>
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0005" type="number" min="0" max="10" step="0.25" class="inputCK" />
+                                    }
+                                </td>
+                                <td id="diemTB">
+                                    @item.GetDiemTb().ToString("##.#")
+                                </td>
+                                <td id="xeploai" style="color: blue;">
+                                    @item.GetXepLoai()
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    function ThemDiem(that) {
+        $(that).hide();
+        $(that).next().show();
+    }
+
+    function InputKTMieng() {
+        $(".addDM").hide();
+        $(".inputmieng").show();
+    }
+
+    function InputKT15P() {
+        $(".add15p").hide();
+        $(".input15p").show();
+    }
+
+    function InputKT1T() {
+        $(".add1T").hide();
+        $(".input1T").show();
+    }
+
+    function InputKTGK() {
+        $(".addGK").hide();
+        $(".inputGK").show();
+    }
+
+    function InputKTCK() {
+        $(".addCK").hide();
+        $(".inputCK").show();
+    }
+
+    $(".inputmieng, .input15p, .input1T, .inputGK, .inputCK").focusout(function () {
+        var that = this;
+        if ($(this).val() != null) {
+            var data = {
+                DiemSo: $(that).val(),
+                UserId: $(that).data("userid"),
+                LopId: $("#LopId").val(),
+                MonHocMaMH: $("#MonHocId").val(),
+                HocKyMaHKy: $("#hocky").val(),
+                LoaiDiemId: $(that).data("loaidiem"),
+                DiemId: $(that).data("diemid")
+            }
+            $.ajax({
+                url: '/admin/Lop/LuuDiem',
+                type: 'POST',
+                data: data,
+                success: function () {
+                    $(that).prev().before("<span style='margin: 1px;'>" + $(that).val() + "</span>");
+                    $(that).hide();
+                    $(that).prev().show();
+                }
+            });
+        }
+    });
+
+    $("#tinhDiem").click(function () {
+        var that = this;
+        if ($(this).val() != null) {
+            var data = {
+                DiemSo: $(that).val()
+            }
+            $.ajax({
+                url: '/admin/StudentManagement/DiemSo',
+                type: 'POST',
+                data: data,
+                success: function () {
+
+                }
+            });
+        }
+    });
+</script>

@@ -14,7 +14,7 @@
     <div class="section__content section__content--p30">
         <div class="container-fluid">
             <div class="main-content">
-                <form asp-action="Index" class="d-flex justify-content-between" action="" method="POST">
+                <form asp-action="Index" class="d-flex justify-content-between mb-4" action="" method="POST">
                     <div class="form-group form-header">
                         <input class="form-control-lg" style="width: 500px;" type="text" name="SearchString" value="@Model.RouteValue["SearchString"]" placeholder="Tìm kiếm theo họ, tên..." />
                         <button class="au-btn--submit" type="submit">
@@ -36,15 +36,10 @@
                                 <th>Mã HS</th>
                                 <th>Họ </th>
                                 <th>Tên</th>
-                                <th>Lớp</th>
                                 <th>Giới Tính</th>
                                 <th>Ngày Sinh</th>
                                 <th>Quê Quán</th>
-                                <th>Dân Tộc</th>
-                                <th>Tôn Giáo</th>
-                                <th>Địa Chỉ</th>
-                                <th>SDT</th>
-                                <th>Ghi Chú</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,15 +50,10 @@
                                     <td>@user.MaNgDung</td>
                                     <td>@user.Ho</td>
                                     <td>@user.Ten</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>@user.GioiTinh</td>
+                                    <td>@user.NgaySinh.ToShortDateString()</td>
+                                    <td>@user.NoiSinh</td>
+                                    <td>@Html.ActionLink("Thông Tin Chi Tiết", "XemThongTinHS", "StudentManagement", new { UserId = user.MaNgDung }, null)</td>
                                 </tr>
                             }
                         </tbody>

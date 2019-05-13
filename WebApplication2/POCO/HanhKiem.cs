@@ -11,6 +11,8 @@ namespace WebApplication2.POCO
 
         public string TenHK { get; set; }
 
+        public string GhiChu { get; set; }
+
         public ICollection<KetQua> KetQuas { get; set; }
     }
 }

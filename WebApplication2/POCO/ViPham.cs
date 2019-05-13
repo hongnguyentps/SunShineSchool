@@ -9,11 +9,15 @@ namespace WebApplication2.POCO
     public class ViPham
     {
         public int Id { get; set; }
-        public string UserId { get; set; }
-        public string TenLoi { get; set; }
-        public string TenDiem { get; set; }
+
+        public string HsId { get; set; }
+
+        public string LoaiViPham { get; set; }
+
+        public DateTime NgayViPham { get; set; }
+
         public string GhiChu { get; set; }
 
-        public NguoiDung MaHS { get; set; }
+        public NguoiDung Hs { get; set; }
     }
 }

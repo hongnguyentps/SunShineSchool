@@ -17,6 +17,7 @@
     <Compile Remove="Data\Migrations\20190417101550_ChangeDB003.cs" />
     <Compile Remove="Data\Migrations\20190417171403_ChangeDB004.cs" />
     <Compile Remove="Migrations\20190423121441_ChangeDB005.cs" />
+    <Compile Remove="Migrations\20190512131925_XoaDuThua.cs" />
     <Compile Remove="PaginatedList.cs" />
   </ItemGroup>
 

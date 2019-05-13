@@ -12,7 +12,7 @@ namespace WebApplication2.Models
 
         public string TenLop { get; set; }
 
-        public string TenGiaoVien { get; set; }
+        public string TenGVCN { get; set; }
 
         public string NienKhoa { get; set; }
     }

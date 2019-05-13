@@ -8,7 +8,10 @@ namespace WebApplication2.POCO
     public class NienKhoa
     {
         public string NienKhoaId { get; set; }
+
         public string TenNK { get; set; }
+
+        public string GhiChu { get; set; }
 
         public ICollection<Lop> Lops { get; set; }
     }

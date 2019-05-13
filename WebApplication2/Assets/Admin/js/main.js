@@ -1610,6 +1610,25 @@
     } catch (error) {
         console.log(error);
     }
+
+    try {
+        // Hamburger Menu
+        $('#slider-hamburger').on('click', function () {
+            if ($('.menu-sidebar').hasClass('d-lg-block')) {
+                $('.menu-sidebar').removeClass('d-lg-block');
+                $('.page-container').css('padding-left', 0);
+                $('.header-desktop').css('left', 0);
+            } else {
+                $('.menu-sidebar').addClass('d-lg-block');
+                $('.page-container').css('padding-left', 300);
+                $('.header-desktop').css('left', 300);
+            }
+
+        });
+        
+    } catch (error) {
+        console.log(error);
+    }
 })(jQuery);
 (function ($) {
     // USE STRICT

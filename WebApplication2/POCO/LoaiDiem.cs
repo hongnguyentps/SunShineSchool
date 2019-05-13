@@ -13,6 +13,8 @@ namespace WebApplication2.POCO
 
         public string HeSo { get; set; }
 
+        public string GhiChu { get; set; }
+
         public ICollection<Diem> Diems { get; set; }
     }
 }

@@ -15,18 +15,21 @@
     <div class="section__content section__content--p30">
         <div class="container-fluid">
             <div class="main-content">
-                <form asp-action="Index" class="d-flex justify-content-between" action="" method="POST">
+                <form asp-action="Index" class="d-flex justify-content-between mb-4" action="" method="POST">
                     <div class="form-group form-header">
                         <input class="form-control-lg" style="width: 500px;" type="text" name="SearchString" value="@Model.RouteValue["SearchString"]" placeholder="Tìm kiếm theo họ, tên..." />
                         <button class="au-btn--submit" type="submit">
                             <i class="zmdi zmdi-search"></i>
                         </button>
                     </div>
+                    @if(ViewBag.Role == "Admin")
+                    {
                     <div class="form-group">
-                        <a href="/admin/StudentManagement/ThemHS" class="au-btn au-btn-icon au-btn--blue">
+                        <a href="/admin/GiaoVien/ThemGV" class="au-btn au-btn-icon au-btn--blue">
                             <i class="zmdi zmdi-plus"></i>Thêm Giáo Viên
                         </a>
                     </div>
+                    }
                 </form>
                 <div class="table-responsive table--no-card m-b-30">
                     <table class="table table-borderless table-striped table-earning">
@@ -36,8 +39,9 @@
                                 <th>Mã GV</th>
                                 <th>Họ </th>
                                 <th>Tên</th>
+                                <th>Giới tính</th>
+                                <th>Ngày Sinh</th>
                                 <th>Bộ Môn</th>
-                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -49,14 +53,11 @@
                                     <td>@item.MaNgDung</td>
                                     <td>@item.Ho</td>
                                     <td>@item.Ten</td>
-                                    <td></td>
-                                    <td>@Html.ActionLink("Xem Thông Tin Chi Tiết", "Index", "GiaoVien", new { id = item.MaNgDung }, null)</td>
+                                    <td>@item.GioiTinh</td>
+                                    <td>@item.NgaySinh.ToShortDateString()</td>
+                                    <td>@item.MonHoc</td>
                                     <td>
-                                        <div class="table-data-feature">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
-                                                <i class="zmdi zmdi-edit"></i>
-                                            </button>
-                                        </div>
+                                        @Html.ActionLink("Thông Tin Chi Tiết", "XemThongTinGV", "GiaoVien", new { UserId = item.MaNgDung}, null)
                                     </td>
                                 </tr>
                             }

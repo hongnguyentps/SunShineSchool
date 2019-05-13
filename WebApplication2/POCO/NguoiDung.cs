@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication2.Data;
@@ -24,6 +25,11 @@ namespace WebApplication2.POCO
         public string HoTenCha { get; set; }
         public string HoTenMe { get; set; }
         public string GhiChu { get; set; }
+        [NotMapped]
+        public string MonHoc { get; set; }
+
+        [NotMapped]
+        public string MaLop { get; set; }
 
         public ApplicationUser Account { get; set; }
         public ICollection<Diem> DiemIds { get; set; }

@@ -21,7 +21,15 @@
                                 <label class=" form-control-label">Mã Học Sinh</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                @Html.TextBoxFor(x => x.MaNgDung, new { @placeholder = "Text", @class = "form-control", @readonly="readonly" })
+                                @Html.TextBoxFor(x => x.MaNgDung, new { @placeholder = "Text", @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">Mã Lớp</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                @Html.TextBoxFor(x => x.MaLop, new { @placeholder = "Text", @class = "form-control" })
                             </div>
                         </div>
                         <div class="row form-group">
@@ -75,7 +83,7 @@
                                 <label for="text-input" class=" form-control-label">Ngày sinh</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                @Html.TextBoxFor(x => x.NgaySinh, new { @placeholder = "Text", @class = "form-control", type="date" })
+                                @Html.TextBoxFor(x => x.NgaySinh, new { @placeholder = "Text", @class = "form-control", type = "date" })
                             </div>
                         </div>
                         <div class="row form-group">
@@ -104,6 +112,14 @@
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">CMND</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                @Html.TextBoxFor(x => x.Cmnd, new { @placeholder = "Text", @class = "form-control", type ="number" })
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
                                 <label for="text-input" class=" form-control-label">SDT</label>
                             </div>
                             <div class="col-12 col-md-9">
@@ -115,7 +131,7 @@
                                 <label for="email-input" class=" form-control-label">Email</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                @Html.TextBoxFor(x => x.Email, new { @placeholder = "Text", @class = "form-control", type="email" })
+                                @Html.TextBoxFor(x => x.Email, new { @placeholder = "Text", @class = "form-control", type = "email" })
                             </div>
                         </div>
                         <div class="row form-group">
@@ -128,6 +144,14 @@
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-3">
+                                <label for="email-input" class=" form-control-label">Họ Tên Mẹ</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                @Html.TextBoxFor(x => x.HoTenMe, new { @placeholder = "Text", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
                                 <label for="textarea-input" class=" form-control-label">Ghi chú</label>
                             </div>
                             <div class="col-12 col-md-9">
@@ -136,15 +160,15 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-dot-circle-o"></i> Submit
-                        </button>
-                        <button type="reset" class="btn btn-danger">
-                            <i class="fa fa-ban"></i> Reset
-                        </button>
                         <a href="/admin/StudentManagement" class="btn btn-success">
-                            <i class="fa fa-backward"></i> Back
+                            <i class="fa fa-angle-left"></i> Trở lại
                         </a>
+                        <button type="reset" class="btn btn-danger ml-2" style="float: right;">
+                            <i class="fa fa-ban"></i> Hoàn tác
+                        </button>
+                        <button type="submit" class="btn btn-primary" style="float: right;">
+                            <i class="fa fa-cloud-upload-alt"></i> Cập nhật
+                        </button>
                     </div>
                 </div>
             </div>

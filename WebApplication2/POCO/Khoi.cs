@@ -11,6 +11,8 @@ namespace WebApplication2.POCO
 
         public string TenKhoi { get; set; }
 
+        public string GhiChu { get; set; }
+
         public ICollection<Lop> Lops { get; set; }
     }
 }

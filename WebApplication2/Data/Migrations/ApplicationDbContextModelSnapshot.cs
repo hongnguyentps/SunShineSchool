@@ -170,8 +170,6 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<string>("Role");
-
                     b.Property<string>("SecurityStamp");
 
                     b.Property<string>("Ten");
@@ -238,6 +236,8 @@ namespace WebApplication2.Data.Migrations
                     b.Property<string>("MaHK")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("GhiChu");
+
                     b.Property<string>("TenHK");
 
                     b.HasKey("MaHK");
@@ -281,23 +281,29 @@ namespace WebApplication2.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("HanhKiemMaHK");
+                    b.Property<string>("GhiChu");
 
-                    b.Property<string>("HocLucMaHL");
+                    b.Property<string>("HanhKiemId");
+
+                    b.Property<string>("HocLucId");
 
                     b.Property<string>("LopId");
 
-                    b.Property<string>("MaHSMaNgDung");
+                    b.Property<string>("TrangThai");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<double>("diemTBCN");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HanhKiemMaHK");
+                    b.HasIndex("HanhKiemId");
 
-                    b.HasIndex("HocLucMaHL");
+                    b.HasIndex("HocLucId");
 
                     b.HasIndex("LopId");
 
-                    b.HasIndex("MaHSMaNgDung");
+                    b.HasIndex("UserId");
 
                     b.ToTable("KetQuas");
                 });
@@ -306,6 +312,8 @@ namespace WebApplication2.Data.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("GhiChu");
 
                     b.Property<string>("TenKhoi");
 
@@ -318,6 +326,8 @@ namespace WebApplication2.Data.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("GhiChu");
 
                     b.Property<string>("HeSo");
 
@@ -362,6 +372,8 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<string>("GVBMId");
 
+                    b.Property<string>("GhiChu");
+
                     b.Property<string>("LopId");
 
                     b.Property<string>("MonHocId");
@@ -383,6 +395,8 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<string>("UserId");
 
+                    b.Property<string>("GhiChu");
+
                     b.HasKey("LopId", "UserId");
 
                     b.HasIndex("UserId");
@@ -394,6 +408,8 @@ namespace WebApplication2.Data.Migrations
                 {
                     b.Property<string>("MaMH")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("GhiChu");
 
                     b.Property<string>("MoTa");
 
@@ -451,6 +467,8 @@ namespace WebApplication2.Data.Migrations
                     b.Property<string>("NienKhoaId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("GhiChu");
+
                     b.Property<string>("TenNK");
 
                     b.HasKey("NienKhoaId");
@@ -466,17 +484,15 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<string>("GhiChu");
 
-                    b.Property<string>("MaHSMaNgDung");
+                    b.Property<string>("HsId");
 
-                    b.Property<string>("TenDiem");
+                    b.Property<string>("LoaiViPham");
 
-                    b.Property<string>("TenLoi");
-
-                    b.Property<string>("UserId");
+                    b.Property<DateTime>("NgayViPham");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MaHSMaNgDung");
+                    b.HasIndex("HsId");
 
                     b.ToTable("ViPhams");
                 });
@@ -560,19 +576,19 @@ namespace WebApplication2.Data.Migrations
                 {
                     b.HasOne("WebApplication2.POCO.HanhKiem", "HanhKiem")
                         .WithMany("KetQuas")
-                        .HasForeignKey("HanhKiemMaHK");
+                        .HasForeignKey("HanhKiemId");
 
                     b.HasOne("WebApplication2.POCO.HocLuc", "HocLuc")
                         .WithMany("KetQuas")
-                        .HasForeignKey("HocLucMaHL");
+                        .HasForeignKey("HocLucId");
 
                     b.HasOne("WebApplication2.POCO.Lop", "Lop")
                         .WithMany("KetQuas")
                         .HasForeignKey("LopId");
 
-                    b.HasOne("WebApplication2.POCO.NguoiDung", "MaHS")
+                    b.HasOne("WebApplication2.POCO.NguoiDung", "User")
                         .WithMany("KetQuas")
-                        .HasForeignKey("MaHSMaNgDung");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("WebApplication2.POCO.Lop", b =>
@@ -620,9 +636,9 @@ namespace WebApplication2.Data.Migrations
 
             modelBuilder.Entity("WebApplication2.POCO.ViPham", b =>
                 {
-                    b.HasOne("WebApplication2.POCO.NguoiDung", "MaHS")
+                    b.HasOne("WebApplication2.POCO.NguoiDung", "Hs")
                         .WithMany("ViPhams")
-                        .HasForeignKey("MaHSMaNgDung");
+                        .HasForeignKey("HsId");
                 });
 #pragma warning restore 612, 618
         }

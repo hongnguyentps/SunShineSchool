@@ -1,51 +1,106 @@
-﻿
+﻿@model List<WebApplication2.Areas.Admin.DiemViewModel>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-
+<title>Kết Quả Học Tập</title>
 <div class="page-container">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
             <div class="main-content">
                 <div style="padding-bottom: 20px;">
-                    <select class="combo-box">
-                        <option>HK1</option>
-                        <option>HK2</option>
+                    <div class="tieude mb-1 h3">
+                        <u> KẾT QUẢ HỌC TẬP </u>
+                    </div>
+                    <div class="row ketqua">
+                        <div class="col-2">
+                            <h4>Điểm TB @ViewBag.HocKy :</h4>
+                        </div>
+                        <div class="col-10">
+                            @ViewBag.DiemTBHocKy.ToString("##.#")
+                        </div>
+                        <div class="col-2">
+                            <h4>Xếp Loại Học Lực:</h4>
+                        </div>
+                        <div class="col-10">
+                            @ViewBag.XepLoaiHocKy
+                        </div>
+                    </div>
+                    <select id="combo-box" class="combo-box hocky">
+                        <option value="HK1">HK1</option>
+                        <option value="HK2">HK2</option>
                     </select>
-                </div>
-                <div class="table-responsive table--no-card m-b-30">
-                    <table class="table table-borderless table-striped table-earning">
-                        <thead>
-                            <tr>
-                                <th>Môn Học</th>
-                                <th>Miệng</th>
-                                <th>15p L1</th>
-                                <th>15p L2</th>
-                                <th>15p L3</th>
-                                <th>1 Tiết</th>
-                                <th>Giữa Kỳ</th>
-                                <th>Cuối Kỳ</th>
-                                <th>ĐTB</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Hoa</td>
-                                <td>Hong</td>
-                                <td>Nguyen</td>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                           
-                        </tbody>
-                    </table>
+                    <div class="table-responsive table--no-card m-b-30">
+                        <table class="table table-borderless table-striped table-earning">
+                            <thead>
+                                <tr>
+                                    <th>Môn Học</th>
+                                    <th>KT Miệng</th>
+                                    <th>KT 15'</th>
+                                    <th>KT 1 Tiết</th>
+                                    <th>Thi giữa kỳ</th>
+                                    <th>KT HK</th>
+                                    <th>ĐTB</th>
+                                    <th>Xếp Loại</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.TenMH</td>
+                                        <td>
+                                            @foreach (var diem in item.DiemDetailViewModels.Where(i => i.LoaiDiem == "LD0001"))
+                                            {
+                                                <span class="pr-3">@diem.Diem</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var diem in item.DiemDetailViewModels.Where(i => i.LoaiDiem == "LD0002"))
+                                            {
+                                                <span class="pr-3">@diem.Diem</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var diem in item.DiemDetailViewModels.Where(i => i.LoaiDiem == "LD0003"))
+                                            {
+                                                <span class="pr-3">@diem.Diem</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var diem in item.DiemDetailViewModels.Where(i => i.LoaiDiem == "LD0004"))
+                                            {
+                                                <span class="pr-3">@diem.Diem</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var diem in item.DiemDetailViewModels.Where(i => i.LoaiDiem == "LD0005"))
+                                            {
+                                                <span class="pr-3">@diem.Diem</span>
+                                            }
+                                        </td>
+                                        <td>@item.DiemTb.ToString("##.#")</td>
+                                        <td style="color: #e50404;">@item.Xeploai</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $('#combo-box').val('@ViewBag.HocKy');
+
+        $('#combo-box').change(function() {
+            var hocky = $('#combo-box').val();
+            var link =
+                @Html.Raw('\''+ Url.Action("DiemSo","StudentManagement", new { UserId = ViewBag.UserId, hocKy = "thisIsHocKy" }) + '\'');
+            link = link.replace("thisIsHocKy", hocky);
+            document.location = link;
+        });
+    });
+</script>

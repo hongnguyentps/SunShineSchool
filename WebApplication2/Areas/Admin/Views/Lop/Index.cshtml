@@ -3,8 +3,9 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+@using WebApplication2.POCO
 @model List<WebApplication2.Models.LopViewModel>
-
+<title>Xem Danh Sách Lớp</title>
 @using (Html.BeginForm("index", "Lop"))
 {
     <div class="page-container">
@@ -13,11 +14,11 @@
                 <div class="main-content">
                     <div class="form-group col-lg-4 ">
                         <label>Danh Sách Các Khối</label>
-                        @Html.DropDownList("khoi", (IEnumerable<SelectListItem>) ViewBag.AllKhoi, new {@class = "string form-control", @id = "khoi"})
+                        @Html.DropDownList("khoi", (IEnumerable<SelectListItem>)ViewBag.AllKhoi, new { @class = "string form-control", @id = "khoi" })
                     </div>
                     <div class="form-group col-lg-4 ">
                         <label>Niên Khóa</label>
-                        @Html.DropDownList("nienkhoa", (IEnumerable<SelectListItem>) ViewBag.AllNK, new {@class = "string form-control", @id = "nienkhoa"})
+                        @Html.DropDownList("nienkhoa", (IEnumerable<SelectListItem>)ViewBag.AllNK, new { @class = "string form-control", @id = "nienkhoa" })
                     </div>
 
                     <div class="form-group col-lg-2">
@@ -27,26 +28,36 @@
                     <div class="table-responsive table--no-card m-b-30">
                         <table class="table table-borderless table-striped table-earning">
                             <thead>
-                            <tr>
-                                <th>Mã Lớp</th>
-                                <th>Tên Lớp</th>
-                                <th>Niên Khóa</th>
-                                <th>GVCN</th>
-                                <th></th>
-                            </tr>
+                                <tr>
+                                    <th>Mã Lớp</th>
+                                    <th>Tên Lớp</th>
+                                    <th>Niên Khóa</th>
+                                    <th>GVCN</th>
+                                    <th></th>
+                                    @if (ViewBag.role != "Admin")
+                                    {
+                                        <th></th>
+                                    }
+                                    <th></th>
+                                </tr>
                             </thead>
                             <tbody>
 
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>@item.LopId</td>
-                                    <td>@item.TenLop</td>
-                                    <td>@item.NienKhoa</td>
-                                    <td>@item.TenGiaoVien</td>
-                                    <td>@Html.ActionLink("Xem Danh Sách Học Sinh", "XemDSTheoLop", "Lop", new {id = item.LopId}, null)</td>
-                                </tr>
-                            }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.LopId</td>
+                                        <td>@item.TenLop</td>
+                                        <td>@item.NienKhoa</td>
+                                        <td>@item.TenGVCN</td>
+                                        <td>@Html.ActionLink("Danh Sách Học Sinh", "XemDSTheoLop", "Lop", new { id = item.LopId })</td>
+                                        @if (ViewBag.role != "Admin")
+                                        {
+                                            <td>@Html.ActionLink("Quản Lý Điểm", "NhapDiem", "Lop", new { LopId = item.LopId })</td>
+                                        }
+                                        <td>@Html.ActionLink("Tổng Kết ĐTB", "TinhDTB", "Lop", new { lopId = item.LopId })</td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

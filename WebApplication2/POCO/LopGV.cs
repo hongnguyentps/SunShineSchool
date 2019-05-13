@@ -21,5 +21,7 @@ namespace WebApplication2.POCO
         public string GVBMId { get; set; }
 
         public NguoiDung GVBM { get; set; }
+
+        public string GhiChu { get; set; }
     }
 }

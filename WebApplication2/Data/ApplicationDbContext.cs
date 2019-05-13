@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -64,11 +65,11 @@ namespace WebApplication2.Data
 
             modelBuilder.Entity<NguoiDung>()
                 .HasMany(a => a.KetQuas)
-                .WithOne(b => b.MaHS);
+                .WithOne(b => b.User);
 
             modelBuilder.Entity<NguoiDung>()
                 .HasMany(a => a.ViPhams)
-                .WithOne(b => b.MaHS);
+                .WithOne(b => b.Hs).HasForeignKey(c => c.HsId);
 
             modelBuilder.Entity<Lop>()
                 .HasOne(a => a.NienKhoa)
@@ -84,7 +85,7 @@ namespace WebApplication2.Data
                .HasOne(bc => bc.Khoi)
                .WithMany(c => c.Lops)
                .HasForeignKey(d => d.KhoiId);
-  
+
             modelBuilder.Entity<Lop>()
                 .HasMany(c => c.KetQuas)
                 .WithOne(e => e.Lop);
@@ -111,19 +112,19 @@ namespace WebApplication2.Data
 
             modelBuilder.Entity<HocKy>()
                 .HasMany(a => a.Diems)
-                .WithOne(b => b.HocKy);
+                .WithOne(b => b.HocKy).HasForeignKey(x => x.HocKyMaHKy);
 
             modelBuilder.Entity<LoaiDiem>()
                 .HasMany(a => a.Diems)
-                .WithOne(b => b.LoaiDiem);
+                .WithOne(b => b.LoaiDiem).HasForeignKey(x => x.LoaiDiemId);
 
             modelBuilder.Entity<MonHoc>()
                 .HasMany(a => a.Diems)
-                .WithOne(b => b.MonHoc);
+                .WithOne(b => b.MonHoc).HasForeignKey(x => x.MonHocMaMH);
 
             modelBuilder.Entity<Lop>()
                 .HasMany(a => a.Diems)
-                .WithOne(b => b.Lop);
+                .WithOne(b => b.Lop).HasForeignKey(x => x.LopId);
 
             modelBuilder.Entity<Diem>()
                 .HasOne(e => e.User)
@@ -140,12 +141,18 @@ namespace WebApplication2.Data
         }
     }
 
-    public class ApplicationUser : IdentityUser
+    public class 
+        ApplicationUser : IdentityUser
     {
         public string NguoiDungId { get; set; }
+
+        [NotMapped]
         public string Role { get; set; }
+
         public string Ho { get; set; }
+
         public string Ten { get; set; }
+
         public string GhiChu { get; set; }
 
         public NguoiDung NguoiDung { get; set; }

@@ -1,126 +1,171 @@
-﻿@model IQueryable<WebApplication2.POCO.NguoiDung>
+﻿@model WebApplication2.POCO.NguoiDung
 
 @{
     ViewData["Title"] = "ThongTinChiTiet";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var cc = Model;
 }
-
-<h2>ThongTinChiTiet</h2>
-
-@using (Html.BeginForm("XemThongTinHS", "StudentManagement", FormMethod.Post))
+<title>Thông Tin Học Sinh</title>
+@using (Html.BeginForm("SuaHocSinh", "StudentManagement", FormMethod.Post))
 {
     <div class="page-container">
         <div class="section__content section__content--p30">
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Thêm Học Sinh</strong>
+                        <strong>Thông Tin Học Sinh</strong>
                     </div>
                     <div class="card-body card-block">
-                        <div class="row form-group">
-                            <div class="col col-md-3">
-                                <label class=" form-control-label">Mã Học Sinh</label>
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="@Model.HinhThe"/>
                             </div>
-                            <div class="col-12 col-md-9">
-                                @Model.GetEnumerator().Current.MaNgDung
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label class=" form-control-label">Họ</label>
+                            <div class="col-9">
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label class=" form-control-label">Mã Học Sinh</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        @Html.TextBoxFor(x => x.MaNgDung, new { @placeholder = "Text", @class = "form-control", @readonly = "readonly" })
+                                    </div>
                                 </div>
-                                <div class="col-12 col-md-9">
-                                    @Model.GetEnumerator().Current.Ho
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label class=" form-control-label">Họ</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        @Html.TextBoxFor(x => x.Ho, new { @placeholder = "Text", @class = "form-control" })
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Tên</label>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Tên</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        @Html.TextBoxFor(x => x.Ten, new { @placeholder = "Text", @class = "form-control" })
+                                    </div>
                                 </div>
-                                <div class="col-12 col-md-9">
-                                    @Model.GetEnumerator().Current.Ten
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Giới tính</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        @{
+                                            List<SelectListItem> listItems = new List
+                                                <SelectListItem>();
+                                            listItems.Add(new SelectListItem
+                                            {
+                                                Text = "Nam",
+                                                Value = "Nam"
+                                            });
+                                            listItems.Add(new SelectListItem
+                                            {
+                                                Text = "Nữ",
+                                                Value = "Nữ"
+                                            });
+                                            foreach (var item in listItems)
+                                            {
+                                                if (item.Value == ViewBag.CurrentStatus)
+                                                {
+                                                    item.Selected = true;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        @Html.DropDownListFor(x => x.GioiTinh, listItems, new { @class = "form-control" })
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Giới tính</label>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Ngày sinh</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        @Html.TextBoxFor(x => x.NgaySinh, "{0:dd/MM/yyyy}", new { @placeholder = "Text", @class = "form-control" })
+                                    </div>
                                 </div>
-                                <div class="col-12 col-md-9">
-                                    @Model.GetEnumerator().Current.GioiTinh
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Nơi Sinh</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        @Html.TextBoxFor(x => x.NoiSinh, new { @placeholder = "Text", @class = "form-control" })
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Ngày sinh</label>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Dân tộc</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        @Html.TextBoxFor(x => x.DanToc, new { @placeholder = "Text", @class = "form-control" })
+                                    </div>
                                 </div>
-                                <div class="col-12 col-md-9">
-                                    @Model.GetEnumerator().Current.NgaySinh
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Tôn Giáo</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        @Html.TextBoxFor(x => x.TonGiao, new { @placeholder = "Text", @class = "form-control" })
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Nơi Sinh</label>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">CMND</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        @Html.TextBoxFor(x => x.Cmnd, new { @placeholder = "Text", @class = "form-control", type= "number"})
+                                    </div>
                                 </div>
-                                <div class="col-12 col-md-9">
-                                    @Model.GetEnumerator().Current.NoiSinh
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">SDT</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        @Html.TextBoxFor(x => x.SDT, new { @placeholder = "Text", @class = "form-control" })
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Dân tộc</label>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="email-input" class=" form-control-label">Email</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        @Html.TextBoxFor(x => x.Email, new { @placeholder = "Text", @class = "form-control", type = "email" })
+                                    </div>
                                 </div>
-                                <div class="col-12 col-md-9">
-                                    @Model.GetEnumerator().Current.DanToc
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="email-input" class=" form-control-label">Họ Tên Cha</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        @Html.TextBoxFor(x => x.HoTenCha, new { @placeholder = "Text", @class = "form-control" })
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Tôn Giáo</label>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="email-input" class=" form-control-label">Họ Tên Mẹ</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        @Html.TextBoxFor(x => x.HoTenMe, new { @placeholder = "Text", @class = "form-control" })
+                                    </div>
                                 </div>
-                                <div class="col-12 col-md-9">
-                                    @Model.GetEnumerator().Current.TonGiao
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">SDT</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    @Model.GetEnumerator().Current.SDT
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="email-input" class=" form-control-label">Email</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    @Model.GetEnumerator().Current.Email
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="email-input" class=" form-control-label">Họ Tên Cha</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    @Model.GetEnumerator().Current.HoTenCha
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="textarea-input" class=" form-control-label">Ghi chú</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    <textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="textarea-input" class=" form-control-label">Ghi chú</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fa fa-dot-circle-o"></i> Submit
-                            </button>
-                            <button type="reset" class="btn btn-danger btn-sm">
-                                <i class="fa fa-ban"></i> Reset
-                            </button>
-                        </div>
+                        
+                    </div>
+                    <div class="card-footer">
+                        <a href="/admin/StudentManagement" class="btn btn-success">
+                            <i class="fa fa-angle-left"></i> Trở lại
+                        </a>
+                        <button type="submit" class="btn btn-primary" style="float: right;">
+                            <i class="fa fa-cloud-upload-alt"></i> Cập nhật
+                        </button>
                     </div>
                 </div>
             </div>

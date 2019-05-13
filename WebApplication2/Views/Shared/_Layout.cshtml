@@ -16,6 +16,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <div class="header">
@@ -85,12 +86,7 @@
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
+        
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
@@ -104,86 +100,8 @@
 
 </body>
 </html>
-<!--Start of Tawk.to Script-->
-@*<script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    (function () {
-        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/5aefc8b6227d3d7edc2501d1/default';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0.parentNode.insertBefore(s1, s0);
-    })();
-</script>*@
-<!--End of Tawk.to Script-->
-
+<script src="/Assets/Admin/vendor/jquery-3.2.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<script type="text/javascript">
-    var ERR_MSG = 'Bạn Vui L&#242;ng Nhập Địa Chỉ Email';
-    var SUCCESS_MSG = 'Cảm ơn bạn đ&#227; đăng k&#253; nhận bản tin từ TTC Edu.';
-    var FAIL_MSG = 'LoiSubscribeDangKy';
-    var lang = 'vi';
-    var domain = 'saigon';
-    var language = 'vi';
-
-    $('.menu  ul.normal li').hover(function () {
-        var detail = $(this).find('.detail-info').html();
-        $(this).closest('.row').find('.col-xs-8').html(detail);
-    });
-
-    $('.btn-subcribe').click(function () {
-        if ($(".txt-email").val() === "") {
-            alert(ERR_MSG);
-            $(".txt-email").focus();
-            return;
-        }
-
-        if (!validateEmail($(".txt-email").val())) {
-            alert(ERR_MSG);
-            $(".txt-email").focus();
-            return;
-        }
-
-        $.post('/home/subscribe', { email: $(".txt-email").val(), language: lang, domain: domain })
-            .done(function (data) {
-                if (data.Status == 1) {
-                    alert(SUCCESS_MSG);
-                    $(".txt-email").val('');
-                } else {
-                    alert(data.EmailSend);
-                    console.log(data);
-                }
-            })
-            .fail(function () {
-                alert(FAIL_MSG);
-            });
-    });
-
-</script>
-
-<script type="text/javascript">
-    $('.submit-form').click(function () {
-        $(this).closest('form').submit();
-    });
-
-    $('form').submit(function (e) {
-        var count = 0;
-        $.each($(this).find('.required-custom'), function (i, v) {
-            var val = $(v).val();
-            if (val == '') {
-                $(v).css('border-color', '#ff0e0e');
-                count += 1;
-            } else {
-                $(v).attr('style', '');
-            }
-        });
-        if (count > 0) {
-            e.preventDefault();
-        }
-    });
-
-</script>

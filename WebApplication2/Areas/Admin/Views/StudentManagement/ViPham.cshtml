@@ -1,0 +1,53 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<WebApplication2.POCO.ViPham>
+@addTagHelper *, ReflectionIT.Mvc.Paging
+@{
+    ViewData["Title"] = "Xem Vi Phạm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var index = 1;
+    int pageNumber = ViewBag.Page;
+    int pageSize = ViewBag.PageSize;
+}
+
+@using (Html.BeginForm("ViPham", "StudentManagement", FormMethod.Get))
+{
+    <div class="page-container">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="main-content pt-3">
+                    <p class="h3 tieude">
+                        DANH SÁCH VI PHẠM
+                    </p>
+                    <div class="table-responsive table--no-card m-b-30">
+                        <table class="table table-borderless table-striped table-earning">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã Học Sinh</th>
+                                    <th>Lỗi Vi Phạm</th>
+                                    <th>Thời Gian</th>
+                                    <th>Ghi Chú</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tbody class="background-table">
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@(index++)</td>
+                                        <td>@item.HsId</td>
+                                        <td>@item.LoaiViPham</td>
+                                        <td>@item.NgayViPham.ToShortDateString()</td>
+                                        <td>@item.GhiChu</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav aria-label="navigation">
+                        <vc:pager paging-list="@Model" />
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+}

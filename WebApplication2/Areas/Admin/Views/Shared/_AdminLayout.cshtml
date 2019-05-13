@@ -28,6 +28,7 @@
     <link href="~/Assets/Admin/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
     <!-- Main CSS-->
     <link href="~/Assets/Admin/css/theme.css" rel="stylesheet" media="all">
+    <script src="/Assets/Admin/vendor/jquery-3.2.1.min.js"></script>
 </head>
 <body class="animsition">
     <div class="page-wrapper">
@@ -37,7 +38,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="~/Assets/Admin/images/icon/icon.jpg" />
+                            @*<img src="~/Assets/Admin/images/icon/icon.jpg" />*@
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -77,25 +78,15 @@
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
                                     <a href="/admin/StudentManagement/index">
-                                        <i class="fa fa-book"></i>Thông Tin Cá Nhân
+                                        <i class="fa fa-book"></i>Danh sách học sinh
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/admin/StudentManagement/DiemSo">
-                                        <i class="fas fa-table"></i>Điểm Số
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="index.html">
+                                    <a href="/admin/StudentManagement/ViPham">
                                         <i class="fa fa-ban"></i>Vi Phạm
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-university"></i>Các Cơ Sở
-                            </a>
                         </li>
                     </ul>
                 </div>
@@ -106,7 +97,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="~/Assets/Admin/images/icon/icon4.png"/>
+                    <img src="~/Assets/Admin/images/icon/icon4.png" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -117,7 +108,6 @@
                                 <i class="fa fa-user"></i>Quản lý tài khoản
                             </a>
                         </li>
-                        
                         <li>
                             <a class="js-arrow" href="/admin/GiaoVien">
                                 <i class="fa fa-id-card"></i>Quản lý giáo viên
@@ -139,20 +129,15 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/admin/StudentManagement/DiemSo">
-                                        <i class="fas fa-table"></i>Điểm Số
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="index.html">
+                                    <a href="/admin/StudentManagement/ViPham">
                                         <i class="fa fa-ban"></i>Vi Phạm
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fas fa-university"></i>Các Cơ Sở
+                            <a href="/admin/ThongKe/Index">
+                                <i class="fas fa-university"></i>Báo Cáo Thống Kê
                             </a>
                         </li>
                     </ul>
@@ -166,46 +151,25 @@
             <header class="header-desktop">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
+                        <button id="slider-hamburger" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
                         <div class="header-wrap">
                             <div class="header-button">
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
-                                            <img src="images/icon/avatar-01.jpg" alt="Ánh Hồnge" />
-                                        </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">Ánh Hồng</a>
+                                            <a class="js-acc-btn" href="#">@User.Identity.Name</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
-                                            <div class="info clearfix">
-                                                <div class="image">
-                                                    <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#">Ánh Hồng</a>
-                                                    </h5>
-                                                    <span class="email">anhhong@example.com</span>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account
-                                                    </a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting
-                                                    </a>
-                                                </div>
-                                            </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout
-                                                </a>
+                                                <span>
+                                                    <a href="/admin/Account/Logout" style="font-size: 16px;">
+                                                        <i class="zmdi zmdi-power"></i>Logout
+                                                    </a>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -226,24 +190,23 @@
             </div>
         </div>
     </div>
-@RenderBody()
-<script src="/Assets/Admin/vendor/jquery-3.2.1.min.js"></script>
-<!-- Bootstrap JS-->
-<script src="~/Assets/Admin/vendor/bootstrap-4.1/popper.min.js"></script>
-<script src="~/Assets/Admin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
-<!-- Vendor JS       -->
-<script src="~/Assets/Admin/vendor/slick/slick.min.js"></script>
-<script src="~/Assets/Admin/vendor/wow/wow.min.js"></script>
-<script src="~/Assets/Admin/vendor/animsition/animsition.min.js"></script>
-<script src="~/Assets/Admin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-<script src="~/Assets/Admin/vendor/counter-up/jquery.waypoints.min.js"></script>
-<script src="~/Assets/Admin/vendor/counter-up/jquery.counterup.min.js"></script>
-<script src="~/Assets/Admin/vendor/circle-progress/circle-progress.min.js"></script>
-<script src="~/Assets/Admin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="~/Assets/Admin/vendor/chartjs/Chart.bundle.min.js"></script>
-<script src="~/Assets/Admin/vendor/select2/select2.min.js"></script>
-<!-- Main JS-->
-<script src="~/Assets/Admin/js/main.js"></script>
+    @RenderBody()
+    <!-- Bootstrap JS-->
+    <script src="~/Assets/Admin/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="~/Assets/Admin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="~/Assets/Admin/vendor/slick/slick.min.js"></script>
+    <script src="~/Assets/Admin/vendor/wow/wow.min.js"></script>
+    <script src="~/Assets/Admin/vendor/animsition/animsition.min.js"></script>
+    <script src="~/Assets/Admin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="~/Assets/Admin/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="~/Assets/Admin/vendor/counter-up/jquery.counterup.min.js"></script>
+    <script src="~/Assets/Admin/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="~/Assets/Admin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="~/Assets/Admin/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="~/Assets/Admin/vendor/select2/select2.min.js"></script>
+    <!-- Main JS-->
+    <script src="~/Assets/Admin/js/main.js"></script>
 </body>
 </html>
 
