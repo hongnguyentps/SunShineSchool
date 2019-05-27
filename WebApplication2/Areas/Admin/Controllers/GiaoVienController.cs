@@ -104,5 +104,28 @@ namespace WebApplication2.Areas.Admin.Controllers
                 pMaTongQuat = "Không thể tăng hơn nữa";
             return pMaTongQuat;
         }
+
+        public IActionResult ThongBao()
+        {
+            var user = User.Identity.Name;
+            var magv = _applicationDbContext.NguoiDungs.Where(x => x.Email == user).Select(y => y.MaNgDung).FirstOrDefault();
+            var thongbao = _applicationDbContext.SuKiens.Where(x => x.UserId == magv).ToList();
+            return View(thongbao);
+        }
+
+        public IActionResult ThemTB()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult LuuTB(SuKien thongbao)
+        {
+            var addSK = _applicationDbContext.SuKiens.Add(thongbao);
+            thongbao.UserId = User.Identity.Name;
+            thongbao.NgayTao = DateTime.Now;
+            _applicationDbContext.SaveChanges();
+            return RedirectToAction("ThongBao");
+        }
     }
 }

@@ -46,7 +46,7 @@ namespace WebApplication2.Areas.Admin
             return View(thongbao);
         }
 
-        public IActionResult ThemTB()
+        public IActionResult ThemSK()
         {
             return View();
         }
@@ -54,9 +54,12 @@ namespace WebApplication2.Areas.Admin
         [HttpPost]
         public IActionResult LuuTB(SuKien sukien)
         {
-            var addSK = _applicationDbContext.SuKiens.Add(sukien);
+            var user = User.Identity.Name;
+            var ngdang = _applicationDbContext.NguoiDungs.Where(x => x.Email == user).Select(y => y.MaNgDung).FirstOrDefault();
             sukien.NgayTao = DateTime.Now;
+            sukien.UserId = ngdang;
             _applicationDbContext.SaveChanges();
+            _applicationDbContext.SuKiens.Add(sukien);
             return RedirectToAction("SuKien");
         }
 

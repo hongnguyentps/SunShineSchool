@@ -15,10 +15,12 @@ namespace WebApplication2.POCO
 
         public string NoiDung { get; set; }
 
-        public string NguoiTao { get; set; }
+        public string UserId { get; set; }
 
         public DateTime NgayTao { get; set; }
 
         public string GhiChu { get; set; }
+
+        public NguoiDung User { get; set; }
     }
 }

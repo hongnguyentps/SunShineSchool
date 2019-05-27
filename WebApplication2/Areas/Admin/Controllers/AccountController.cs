@@ -42,7 +42,7 @@ namespace WebApplication2.Areas.Admin.Controllers
             ViewBag.Role = isAdmin[0];
             if (isAdmin[0] == "Giáo Viên")
             {
-                
+                return View("Notice");
             }
             var roles = data.Roles.ToList();
             var allrole = new List<SelectListItem>
