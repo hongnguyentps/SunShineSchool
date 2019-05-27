@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "ThongBao";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var index = 1;
+}
+
+@model List<WebApplication2.POCO.SuKien>
+<title>Quản Lý Thông Báo</title>
+<div class="page-container">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="main-content">
+                <form asp-action="Index" class="d-flex justify-content-between mb-4" action="" method="POST">
+                    <div class="form-group">
+                        <a href="/admin/Admin/ThemTB" class="au-btn au-btn-icon au-btn--blue">
+                            <i class="zmdi zmdi-plus"></i>Thêm Thông Báo
+                        </a>
+                    </div>
+
+                </form>
+                <div class="table-responsive table--no-card m-b-30">
+                    <table class="table table-borderless table-striped table-earning">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã SK</th>
+                                <th>Loại SK</th>
+                                <th>Tiêu Đề</th>
+                                <th>Nội Dung</th>
+                                <th>Ngày Tạo</th>
+                                <th>Ghi Chú</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@(index++)</td>
+                                    <td>@item.SuKienId</td>
+                                    <td>@item.LoaiSK</td>
+                                    <td>@item.TieuDe</td>
+                                    <td>@item.NoiDung</td>
+                                    <td>@item.NgayTao.ToShortDateString()</td>
+                                    <td>@item.GhiChu</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

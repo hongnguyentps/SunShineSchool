@@ -33,7 +33,7 @@
                                     <th>Tên Lớp</th>
                                     <th>Niên Khóa</th>
                                     <th>GVCN</th>
-                                    <th></th>
+                                    @*<th></th>*@
                                     @if (ViewBag.role != "Admin")
                                     {
                                         <th></th>
@@ -55,7 +55,7 @@
                                         {
                                             <td>@Html.ActionLink("Quản Lý Điểm", "NhapDiem", "Lop", new { LopId = item.LopId })</td>
                                         }
-                                        <td>@Html.ActionLink("Tổng Kết ĐTB", "TinhDTB", "Lop", new { lopId = item.LopId })</td>
+                                        @*<td>@Html.ActionLink("Tổng Kết ĐTB", "TinhDTB", "Lop", new { lopId = item.LopId })</td>*@
                                     </tr>
                                 }
                             </tbody>

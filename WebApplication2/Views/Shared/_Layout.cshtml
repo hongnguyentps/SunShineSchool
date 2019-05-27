@@ -17,10 +17,11 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+    <script src="https://wchat.freshchat.com/js/widget.js"></script>
 </head>
 <body>
     <div class="header">
-        <img src="~/Assets/Admin/images/icon/icon4.png" style="height: 100px; margin-left: 238px;"/>
+        <img src="~/Assets/Admin/images/icon/icon4.png" style="height: 100px; margin-left: 238px;" />
         <partial name="~/Views/Website/_HeaderTop.cshtml" />
         <partial name="~/Views/Website/_HeaderBottom.cshtml" />
     </div>
@@ -86,7 +87,7 @@
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
-        
+
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
@@ -97,7 +98,12 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
-
+    <script>
+        window.fcWidget.init({
+            token: "57adc36f-46a3-47e3-a0a4-10ad2294ad8d",
+            host: "https://wchat.freshchat.com"
+        });
+    </script>
 </body>
 </html>
 <script src="/Assets/Admin/vendor/jquery-3.2.1.min.js"></script>

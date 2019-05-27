@@ -11,12 +11,30 @@
             <div class="main-content">
                 <div style="padding-bottom: 20px;">
                     <div class="tieude mb-1 h3">
-                        <u> KẾT QUẢ HỌC TẬP @ViewBag.HocKy</u>
+                        @if (@ViewBag.HocKy == "CaNam")
+                        {
+                            <u> KẾT QUẢ HỌC TẬP CẢ NĂM</u>
+                        }
+                        else
+                        {
+                            <u> KẾT QUẢ HỌC TẬP @ViewBag.HocKy</u>
+                        }
+
                     </div>
                     <div class="row ketqua">
-                        <div class="col-2 mb-3">
-                            Điểm TB @ViewBag.HocKy:
-                        </div>
+                        @if (@ViewBag.HocKy == "CaNam")
+                        {
+                            <div class="col-2 ">
+                                Điểm TB Cả Năm:
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-2">
+                                Điểm TB @ViewBag.HocKy:
+                            </div>
+                        }
+                        
                         <div class="col-10">
                             @ViewBag.DiemTBHocKy.ToString("##.#")
                         </div>
@@ -26,10 +44,30 @@
                         <div class="col-10">
                             @ViewBag.XepLoaiHocKy
                         </div>
+                        @if (@ViewBag.HocKy == "CaNam")
+                        {
+                            <div class="col-12">
+                                <span> Xếp Loại Hạnh Kiểm:</span> <span class="ml-3">@ViewBag.HanhKiem</span>
+                            </div>
+                        }
+
+                        @if (@ViewBag.HocKy == "CaNam")
+                        {
+                            var trangthai = "Lên lớp";
+                            if ((double) @ViewBag.DiemTBHocKy < 3.5)
+                            {
+                                trangthai = "Ở lại lớp";
+                            }
+                            <div class="col-12">
+                                <span> Trạng Thái:</span> <span class="ml-3">@trangthai</span>
+                            </div>
+                        }
+
                     </div>
                     <select id="combo-box" class="hocky btn btn-info dropdown-toggle">
                         <option value="HK1" class="dropdown-item">HK1</option>
                         <option value="HK2" class="dropdown-item">HK2</option>
+                        <option value="CaNam" class="dropdown-item">Cả năm</option>
                     </select>
                     <table class="table table-hover table-striped table-bordered">
                         <thead class="thead-light">

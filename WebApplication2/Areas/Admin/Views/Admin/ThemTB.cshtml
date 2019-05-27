@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Razor.Language.Intermediate
+@model WebApplication2.POCO.SuKien
+
+@{
+    ViewData["Title"] = "ThemSuKien";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<title>Thêm Sự Kiện Mới</title>
+@using (Html.BeginForm("LuuTB", "Admin", FormMethod.Post))
+{
+    <div class="page-container">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Thêm Sự Kiện Mới</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">Loại Sự Kiện</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                @Html.TextBoxFor(x => x.LoaiSK, new { @placeholder = "Text", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Tiêu Đề</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                @Html.TextBoxFor(x => x.TieuDe, new { @placeholder = "Text", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Nội Dung</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                @Html.TextBoxFor(x => x.NoiDung, new { @placeholder = "Text", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="textarea-input" class=" form-control-label">Ghi chú</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/admin/GiaoVien" class="btn btn-success">
+                            <i class="fa fa-angle-left"></i> Trở lại
+                        </a>
+                        <button type="reset" class="btn btn-danger ml-2" style="float: right;">
+                            <i class="fa fa-ban"></i> Hoàn tác
+                        </button>
+                        <button type="submit" class="btn btn-primary" style="float: right;">
+                            <i class="fa fa-cloud-upload-alt"></i> Lưu
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

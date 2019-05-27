@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Thông Tin GVCN";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model WebApplication2.POCO.NguoiDung
+<title>Thông Tin Giáo Viên Chủ Nhiệm</title>
+
+<div class="page-container">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="main-content pt-3">
+                <p class=" h3 tieu-de">
+                    THÔNG TIN LIÊN LẠC
+                </p>
+                <div class="hienthitt">
+                    <div class="row">
+                        <div class="col-4">
+                            Họ Tên:
+                        </div>
+                        <div class="col-8">
+                            @(Model.Ho + " " + Model.Ten)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            Giới tính:
+                        </div>
+                        <div class="col-8">
+                            @Model.GioiTinh
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            Email:
+                        </div>
+                        <div class="col-8">
+                            @Model.Email
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            Số điện thoại:
+                        </div>
+                        <div class="col-8">
+                            @Model.SDT
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

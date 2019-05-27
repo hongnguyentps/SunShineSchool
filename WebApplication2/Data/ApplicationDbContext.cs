@@ -26,6 +26,7 @@ namespace WebApplication2.Data
         public DbSet<KetQua> KetQuas { get; set; }
         public DbSet<HanhKiem> HanhKiems { get; set; }
         public DbSet<HocLuc> HocLucs { get; set; }
+        public DbSet<SuKien> SuKiens { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -57,6 +58,8 @@ namespace WebApplication2.Data
             modelBuilder.Entity<ViPham>().Property(f => f.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<HanhKiem>().HasKey(i => i.MaHK);
             modelBuilder.Entity<HocLuc>().HasKey(i => i.MaHL);
+            modelBuilder.Entity<SuKien>().HasKey(i => i.SuKienId);
+            modelBuilder.Entity<SuKien>().Property(f => f.SuKienId).ValueGeneratedOnAdd();
 
             modelBuilder.Entity<NguoiDung>()
                 .HasOne(a => a.Account)

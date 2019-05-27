@@ -40,6 +40,10 @@ namespace WebApplication2.Areas.Admin.Controllers
             // Get the roles for the user
             var isAdmin = await _userManager.GetRolesAsync(user);
             ViewBag.Role = isAdmin[0];
+            if (isAdmin[0] == "Giáo Viên")
+            {
+                
+            }
             var roles = data.Roles.ToList();
             var allrole = new List<SelectListItem>
             {

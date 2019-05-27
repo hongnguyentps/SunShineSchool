@@ -42,8 +42,6 @@ namespace WebApplication2.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 
@@ -61,7 +59,17 @@ namespace WebApplication2.Controllers
                                                          .Include(x => x.Lop.Khoi)
                                                          .Include(x => x.Lop.NienKhoa)
                                                          .Where(x => x.UserId == idHs.MaNgDung).ToList();
+            var gvcnId = lopTungHoc.Select(x => x.Lop.GVCNId).FirstOrDefault();
+            var gvcn = _applicationDbContext.NguoiDungs.Where(x => x.MaNgDung == gvcnId).FirstOrDefault();
+            ViewBag.GVCN = gvcn.Ten;
             return View(lopTungHoc);
+        }
+
+        [HttpGet]
+        public IActionResult XemGVCN(string maGV)
+        {
+            var gvcn = _applicationDbContext.NguoiDungs.Where(x => x.MaNgDung == maGV).FirstOrDefault();
+           return View(gvcn);
         }
 
         public async Task<IActionResult> XemDiem(string UserId, string LopId, string hocKy = "HK1")
@@ -74,28 +82,48 @@ namespace WebApplication2.Controllers
                 .Include(x => x.User)
                 .Include(x => x.MonHoc)
                 .Include(x => x.LoaiDiem)
-                .Where(x => x.HocKy.MaHKy == hocKy && x.UserId == UserId && x.LopId == LopId).GroupBy(x => x.MonHoc).Select(m =>
-                    new DiemViewModel()
-                    {
-                        MaMH = m.Key.MaMH,
-                        TenMH = m.Key.TenMonHoc,
-                        DiemDetailViewModels = m.Select(x => new DiemDetailViewModel()
-                        {
-                            Diem = x.DiemSo,
-                            Heso = x.LoaiDiem.HeSo,
-                            LoaiDiem = x.LoaiDiemId
-                        }).ToList()
-                    }).ToList();
+                .Where(x => (hocKy == "CaNam" || x.HocKy.MaHKy == hocKy) && x.UserId == UserId && x.LopId == LopId).GroupBy(x => x.MonHoc).Select(m =>
+                   new DiemViewModel()
+                   {
+                       MaMH = m.Key.MaMH,
+                       TenMH = m.Key.TenMonHoc,
+                       DiemDetailViewModels = m.Select(x => new DiemDetailViewModel()
+                       {
+                           Diem = x.DiemSo,
+                           Heso = x.LoaiDiem.HeSo,
+                           LoaiDiem = x.LoaiDiemId
+                       }).ToList()
+                   }).ToList();
+
             foreach (var data in diemHosSinh)
             {
                 var tongDiem = data.DiemDetailViewModels.Sum(m => m.Diem * int.Parse(m.Heso));
                 var tongHeso = data.DiemDetailViewModels.Sum(m => int.Parse(m.Heso));
                 data.DiemTb = tongDiem / tongHeso;
                 data.Xeploai = GetXepLoai(data);
-               
             }
 
+            var lop = _applicationDbContext.Lops.Include(m=> m.NienKhoa).FirstOrDefault(m => m.Id == LopId);
+
+            var viphams = _applicationDbContext.ViPhams.Where(m => m.HsId == UserId).AsEnumerable().GroupBy(x => new {x.HsId, x.NgayViPham.Year}).Select(m =>
+                new
+                {
+                    key = m.Key,
+                    count = m.Count()
+                }).FirstOrDefault(m=> m.key.Year.ToString() == lop.NienKhoa.GhiChu  );
+            if (viphams != null)
+            {
+                var hanhkiem = XepLoai(viphams.count);
+                ViewBag.HanhKiem = hanhkiem;
+            }
+            else
+            {
+                ViewBag.HanhKiem = "";
+            }
+
+
             ViewBag.LopId = LopId;
+          
             ViewBag.UserId = UserId;
             ViewBag.HocKy = hocKy;
             ViewBag.DiemTBHocKy = GetDiemTBHK(diemHosSinh);
@@ -114,6 +142,15 @@ namespace WebApplication2.Controllers
             if (diemTb >= 7 && diemTb < 8) return "Khá";
             if (diemTb < 7 && diemTb >= 5) return "Trung bình";
             if (diemTb < 5) return "Yếu";
+            return string.Empty;
+        }
+
+        private string XepLoai(int count)
+        {
+            if (count >= 6) return "Yếu";
+            if (count <= 5 && count >= 4) return "Trung bình";
+            if (count <= 3 && count >= 2) return "Khá";
+            if (count <= 1) return "Giỏi";
             return string.Empty;
         }
 

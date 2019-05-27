@@ -76,7 +76,7 @@ namespace WebApplication2.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult NhapDiem(string lopId)
+        public IActionResult NhapDiem(string lopId, string hocKy = "HK1")
         {
             var data = _applicationDbContext.LopHss
                 .Include(x => x.User)
@@ -86,14 +86,16 @@ namespace WebApplication2.Areas.Admin.Controllers
             var UserCurrently = _userManager.GetUserAsync(User);
             var monHocId = _applicationDbContext.LopGvs
                 .FirstOrDefault(x => x.GVBMId == UserCurrently.Result.NguoiDungId && x.LopId == lopId)?.MonHocId;
-            string hocKy = string.Empty;
-            if (DateTime.Now.Month >= 1 || DateTime.Now.Month <= 6)
+            if(hocKy == null)
             {
-                hocKy = "HK1";
-            }
-            else
-            {
-                hocKy = "HK2";
+                if (DateTime.Now.Month >= 1 || DateTime.Now.Month <= 6)
+                {
+                    hocKy = "HK1";
+                }
+                else
+                {
+                    hocKy = "HK2";
+                }
             }
 
             var list = new List<DiemCaNhan>();
