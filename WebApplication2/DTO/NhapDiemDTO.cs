@@ -9,7 +9,7 @@ namespace WebApplication2.DTO
     public class DiemDTO
     {
         public int DiemId { get; set; }
-        public double DiemSo { get; set; }
+        public double? DiemSo { get; set; }
 
         public string UserId { get; set; }
 

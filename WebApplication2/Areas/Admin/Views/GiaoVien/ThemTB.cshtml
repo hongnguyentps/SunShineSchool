@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Razor.Language.Intermediate
-@model WebApplication2.POCO.SuKien
+﻿@model WebApplication2.POCO.SuKien
 
 @{
     ViewData["Title"] = "ThemSuKien";
@@ -37,7 +36,7 @@
                                 <label for="text-input" class=" form-control-label">Nội Dung</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                @Html.TextBoxFor(x => x.NoiDung, new { @placeholder = "Text", @class = "form-control" })
+                                @Html.TextAreaFor(x => x.NoiDung, new { @placeholder = "Text", @class = "form-control", rows ="4"  })
                             </div>
                         </div>
                         <div class="row form-group">
@@ -45,7 +44,7 @@
                                 <label for="textarea-input" class=" form-control-label">Ghi chú</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
+                                @Html.TextAreaFor(x => x.GhiChu, new { @placeholder = "Text", @class = "form-control", rows = "4" })
                             </div>
                         </div>
                     </div>

@@ -27,6 +27,9 @@ namespace WebApplication2.Data
         public DbSet<HanhKiem> HanhKiems { get; set; }
         public DbSet<HocLuc> HocLucs { get; set; }
         public DbSet<SuKien> SuKiens { get; set; }
+        public DbSet<YKienPH> YKien { get; set; }
+        public DbSet<HocKyNienKhoa> HocKyNienKhoas { get; set; }
+        public DbSet<LichSu> LichSus { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -41,7 +44,6 @@ namespace WebApplication2.Data
                 // Primary key
                 b.ToTable("AspNetUsers");
             });
-
             modelBuilder.Entity<NguoiDung>().HasKey(i => i.MaNgDung);
             modelBuilder.Entity<Khoi>().HasKey(e => e.Id);
             modelBuilder.Entity<NienKhoa>().HasKey(i => i.NienKhoaId);
@@ -60,6 +62,9 @@ namespace WebApplication2.Data
             modelBuilder.Entity<HocLuc>().HasKey(i => i.MaHL);
             modelBuilder.Entity<SuKien>().HasKey(i => i.SuKienId);
             modelBuilder.Entity<SuKien>().Property(f => f.SuKienId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<HocKyNienKhoa>().HasKey(bc => new { bc.HocKyId, bc.NienKhoaId });
+            modelBuilder.Entity<LichSu>().HasKey(i => i.Id);
+            modelBuilder.Entity<LichSu>().Property(f => f.Id).ValueGeneratedOnAdd();
 
             modelBuilder.Entity<NguoiDung>()
                 .HasOne(a => a.Account)
@@ -141,6 +146,9 @@ namespace WebApplication2.Data
                 .HasOne(e => e.HocLuc)
                 .WithMany(c => c.KetQuas);
 
+            modelBuilder.Entity<YKienPH>()
+                .HasOne(e => e.User)
+                .WithMany(c => c.YKien);
         }
     }
 

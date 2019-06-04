@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Thông Báo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<WebApplication2.POCO.SuKien>
+<title>Thông Báo</title>
+
+@using (Html.BeginForm("XemLop", "Home", FormMethod.Get))
+{
+    <div class="page-container">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="main-content pt-3">
+                    <p class=" h3 tieu-de">
+                        Thông Báo
+                    </p>
+                    <table class="table table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Tiêu đề</th>
+                                <th>Ngày Tạo</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tbody class="background-table">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.TieuDe</td>
+                                    <td>@item.NgayTao.ToShortDateString()</td>
+                                    <td>@Html.ActionLink("Xem Chi Tiết", "XemTB", "Home", new { Id = item.SuKienId})</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}

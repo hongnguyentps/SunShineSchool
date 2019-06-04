@@ -55,8 +55,11 @@ namespace WebApplication2.Areas.Admin.Controllers
             return View("GiaoVien", model);
         }
 
-        public IActionResult XemThongTinGV(string UserId)
+        public async Task<IActionResult> XemThongTinGV(string UserId)
         {
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            var roles = await _userManager.GetRolesAsync(user);
+            ViewBag.Role = roles[0];
             var giaoVien = _applicationDbContext.NguoiDungs.Where(x => x.MaNgDung == UserId).FirstOrDefault();
             return View(giaoVien);
         }
@@ -122,7 +125,9 @@ namespace WebApplication2.Areas.Admin.Controllers
         public IActionResult LuuTB(SuKien thongbao)
         {
             var addSK = _applicationDbContext.SuKiens.Add(thongbao);
-            thongbao.UserId = User.Identity.Name;
+            var emailGV = User.Identity.Name;
+            var magv = _applicationDbContext.NguoiDungs.Where(x => x.Email == emailGV).Select(y => y.MaNgDung).FirstOrDefault();
+            thongbao.UserId = magv;
             thongbao.NgayTao = DateTime.Now;
             _applicationDbContext.SaveChanges();
             return RedirectToAction("ThongBao");

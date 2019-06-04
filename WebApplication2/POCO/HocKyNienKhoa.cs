@@ -5,14 +5,15 @@ using System.Threading.Tasks;
 
 namespace WebApplication2.POCO
 {
-    public class HocKy
+    public class HocKyNienKhoa
     {
-        public string MaHKy { get; set; }
+        public string HocKyId { get; set; }
 
-        public string TenHKy { get; set; }
+        public string NienKhoaId { get; set; }
+
+        public DateTime NgayKetThuc { get; set; }
 
         public string GhiChu { get; set; }
 
-        public ICollection<Diem> Diems { get; set; }
     }
 }

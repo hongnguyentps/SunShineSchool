@@ -31,9 +31,13 @@ namespace WebApplication2.Areas.Admin
                 var user = await _userManager.FindByEmailAsync(User.Identity.Name);
                 // Get the roles for the user
                 var role = await _userManager.GetRolesAsync(user);
-                if (role[0] == "Admin" || role[0] == "Giáo Viên")
+                if (role[0] == "Admin")
                 {
                     return Redirect("/admin/Account");
+                }
+                if (role[0] == "Giáo Viên")
+                {
+                    return Redirect("/admin/Lop");
                 }
                 return Redirect("https://localhost:44374");
             }

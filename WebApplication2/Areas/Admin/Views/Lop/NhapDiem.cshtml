@@ -2,6 +2,14 @@
     ViewData["Title"] = "NhapDiem";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     var index = 1;
+    var disable = "";
+    var display = "";
+    if (ViewBag.Disabled == true)
+    {
+        disable = "disabled";
+        display = "hidden";
+    }
+
 }
 
 @model WebApplication2.DTO.LayDanhSachLopForDiemDto
@@ -19,11 +27,12 @@
                 </select>
                 <div class="float-lg-right">
                     <button class="btn btn-info mr-2" id="tinhDiem" value="Refresh Page" onClick="window.location.reload();">Tính ĐTB</button>
-                    <button class="btn btn-nhapdiem" onclick="InputKTMieng()">Nhập Điểm Miệng</button>
-                    <button class="btn btn-nhapdiem" onclick="InputKT15P()">Nhập Điểm 15p</button>
-                    <button class="btn btn-nhapdiem" onclick="InputKT1T()">Nhập Điểm 1 Tiết</button>
-                    <button class="btn btn-nhapdiem" onclick="InputKTGK()">Nhập Điểm Giữa Kỳ</button>
-                    <button class="btn btn-nhapdiem" onclick="InputKTCK()">Nhập Điểm Cuối Kỳ</button>
+                    <button class="btn"><a href="/admin/Lop/XemLichSu">Lịch Sử</a></button>
+                    @*<button class="btn btn-nhapdiem" onclick="InputKTMieng()">Nhập Điểm Miệng</button>
+                        <button class="btn btn-nhapdiem" onclick="InputKT15P()">Nhập Điểm 15p</button>
+                        <button class="btn btn-nhapdiem" onclick="InputKT1T()">Nhập Điểm 1 Tiết</button>
+                        <button class="btn btn-nhapdiem" onclick="InputKTGK()">Nhập Điểm Giữa Kỳ</button>
+                        <button class="btn btn-nhapdiem" onclick="InputKTCK()">Nhập Điểm Cuối Kỳ</button>*@
                 </div>
                 <table class="table">
                     <thead class="thead-dark">
@@ -60,23 +69,23 @@
                                             <span class="addDM" onclick="ThemDiem(this);">
                                                 <i class="fa fa-plus-circle"></i>
                                             </span>
-                                            <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0001" type="number" min="0" max="10" step="0.25" class="inputmieng" />
+                                            <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0001" type="number" min="0" max="10" step="0.25" class="inputmieng" @display />
                                         }
                                         else
                                         {
                                             foreach (var itemDiemMieng in item.DiemMiengs)
                                             {
-                                                <input style="width: 40px" data-DiemId="@itemDiemMieng.DiemId" value="@itemDiemMieng.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0001" type="number" min="0" max="10" step="0.25" class="inputmieng" />
+                                                <input style="width: 40px" data-DiemId="@itemDiemMieng.DiemId" value="@itemDiemMieng.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0001" type="number" min="0" max="10" step="0.25" class="inputmieng" @disable />
                                             }
 
-                                             if (item.DiemMiengs.Count < 3)
-                                             {
-                                                 <span class="addDM" onclick="ThemDiem(this);">
-                                                     <i class="fa fa-plus-circle"></i>
-                                                 </span>
-                                             }
+                                            if (item.DiemMiengs.Count < 3)
+                                            {
+                                                <span class="addDM" onclick="ThemDiem(this);">
+                                                    <i class="fa fa-plus-circle"></i>
+                                                </span>
+                                            }
 
-                                            <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0001" type="number" min="0" max="10" step="0.25" class="inputmieng" />
+                                            <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0001" type="number" min="0" max="10" step="0.25" class="inputmieng" @display />
                                         }
                                     </div>
                                 </td>
@@ -86,18 +95,18 @@
                                         <span class="add15p" onclick="ThemDiem(this);">
                                             <i class="fa fa-plus-circle"></i>
                                         </span>
-                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0002" type="number" min="0" max="10" step="0.25" class="input15p" />
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0002" type="number" min="0" max="10" step="0.25" class="input15p" @display />
                                     }
                                     else
                                     {
                                         foreach (var itemDiem15p in item.Diem15ps)
                                         {
-                                            <input style="width: 40px" data-DiemId="@itemDiem15p.DiemId" value="@itemDiem15p.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0002" type="number" min="0" max="10" step="0.25" class="input15p" />
+                                            <input style="width: 40px" data-DiemId="@itemDiem15p.DiemId" value="@itemDiem15p.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0002" type="number" min="0" max="10" step="0.25" class="input15p" @disable />
                                         }
                                         <span class="add15p" onclick="ThemDiem(this);">
                                             <i class="fa fa-plus-circle"></i>
                                         </span>
-                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0002" type="number" min="0" max="10" step="0.25" class="input15p" />
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0002" type="number" min="0" max="10" step="0.25" class="input15p" @display />
                                     }
                                 </td>
                                 <td style="width: 120px;">
@@ -106,18 +115,18 @@
                                         <span class="add1T" onclick="ThemDiem(this);">
                                             <i class="fa fa-plus-circle"></i>
                                         </span>
-                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0003" type="number" min="0" max="10" step="0.25" class="input1T" style="display: inline; width: 40px;" />
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0003" type="number" min="0" max="10" step="0.25" class="input1T" style="display: inline; width: 40px;" @display />
                                     }
                                     else
                                     {
                                         foreach (var itemDiem1Tiet in item.Diem1Tiets)
                                         {
-                                            <input style="width: 40px" data-DiemId="@itemDiem1Tiet.DiemId" value="@itemDiem1Tiet.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0003" type="number" min="0" max="10" step="0.25" class="input1T" />
+                                            <input style="width: 40px" data-DiemId="@itemDiem1Tiet.DiemId" value="@itemDiem1Tiet.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0003" type="number" min="0" max="10" step="0.25" class="input1T" @disable />
                                         }
                                         <span class="add1T" onclick="ThemDiem(this);">
                                             <i class="fa fa-plus-circle"></i>
                                         </span>
-                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0003" type="number" min="0" max="10" step="0.25" class="input1T" />
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0003" type="number" min="0" max="10" step="0.25" class="input1T" @display />
                                     }
                                 </td>
                                 <td style="width: 120px;">
@@ -126,18 +135,18 @@
                                         <span class="addGK" onclick="ThemDiem(this);">
                                             <i class="fa fa-plus-circle"></i>
                                         </span>
-                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0004" type="number" min="0" max="10" step="0.25" class="inputGK" style="display: inline; width: 40px;" />
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0004" type="number" min="0" max="10" step="0.25" class="inputGK" style="display: inline; width: 40px;" @display />
                                     }
                                     else
                                     {
                                         foreach (var itemDiemGiuaKy in item.DiemGiuaKys)
                                         {
-                                            <input style="width: 40px" data-DiemId="@itemDiemGiuaKy.DiemId" value="@itemDiemGiuaKy.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0004" type="number" min="0" max="10" step="0.25" class="inputGK" />
+                                            <input style="width: 40px" data-DiemId="@itemDiemGiuaKy.DiemId" value="@itemDiemGiuaKy.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0004" type="number" min="0" max="10" step="0.25" class="inputGK" @disable />
                                         }
                                         <span class="addGK" onclick="ThemDiem(this);">
                                             <i class="fa fa-plus-circle"></i>
                                         </span>
-                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0004" type="number" min="0" max="10" step="0.25" class="inputGK" />
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0004" type="number" min="0" max="10" step="0.25" class="inputGK" @display />
                                     }
                                 </td>
                                 <td style="width: 120px;">
@@ -146,18 +155,18 @@
                                         <span class="addCK" onclick="ThemDiem(this);">
                                             <i class="fa fa-plus-circle"></i>
                                         </span>
-                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0005" type="number" min="0" max="10" step="0.25" class="inputCK"  style="display: inline; width: 40px;"/>
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0005" type="number" min="0" max="10" step="0.25" class="inputCK" style="display: inline; width: 40px;" @display />
                                     }
                                     else
                                     {
                                         foreach (var itemDiemCuoiKy in item.DiemCuoiKys)
                                         {
-                                            <input style="width: 40px" data-DiemId="@itemDiemCuoiKy.DiemId" value="@itemDiemCuoiKy.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0005" type="number" min="0" max="10" step="0.25" class="inputCK" />
+                                            <input style="width: 40px" data-DiemId="@itemDiemCuoiKy.DiemId" value="@itemDiemCuoiKy.Diem" data-UserId="@item.MaNgDung" data-LoaiDiem="LD0005" type="number" min="0" max="10" step="0.25" class="inputCK" @disable />
                                         }
                                         <span class="addCK" onclick="ThemDiem(this);">
                                             <i class="fa fa-plus-circle"></i>
                                         </span>
-                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0005" type="number" min="0" max="10" step="0.25" class="inputCK" />
+                                        <input data-UserId="@item.MaNgDung" data-LoaiDiem="LD0005" type="number" min="0" max="10" step="0.25" class="inputCK" @display />
                                     }
                                 </td>
                                 <td id="diemTB">
@@ -176,6 +185,11 @@
     </div>
 </div>
 <script>
+
+    $('#hocky').change(function(){
+        var value = $(this).val();
+        window.location.href = window.location.origin + window.location.pathname + "?LopId=@ViewBag.Lop" + "&HocKy=" + value;
+    });
 
     function ThemDiem(that) {
         $(that).hide();
@@ -224,7 +238,7 @@
                 type: 'POST',
                 data: data,
                 success: function () {
-                    $(that).prev().before("<span style='margin: 1px;'>" + $(that).val() + "</span>");
+                    $(that).before("<span style='margin: 12px;'>" + $(that).val() + "</span>");
                     $(that).hide();
                     $(that).prev().show();
                 }

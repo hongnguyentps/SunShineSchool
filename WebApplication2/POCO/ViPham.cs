@@ -12,7 +12,9 @@ namespace WebApplication2.POCO
 
         public string HsId { get; set; }
 
-        public string LoaiViPham { get; set; }
+        public string NoiDungViPham { get; set; }
+
+        public string MaHK { get; set; }
 
         public DateTime NgayViPham { get; set; }
 

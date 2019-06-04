@@ -76,16 +76,18 @@ namespace WebApplication2.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult NhapDiem(string lopId, string hocKy = "HK1")
+        public async Task<IActionResult> NhapDiem(string lopId, string hocKy = "HK1")
         {
+            ViewBag.Lop = lopId;
+            ViewBag.HocKy = hocKy;
             var data = _applicationDbContext.LopHss
                 .Include(x => x.User)
                 .Include(x => x.Lop)
                 .Where(x => lopId == x.LopId)
                 .ToList();
-            var UserCurrently = _userManager.GetUserAsync(User);
+            var UserCurrently = await _userManager.GetUserAsync(User);
             var monHocId = _applicationDbContext.LopGvs
-                .FirstOrDefault(x => x.GVBMId == UserCurrently.Result.NguoiDungId && x.LopId == lopId)?.MonHocId;
+                .FirstOrDefault(x => x.GVBMId == UserCurrently.NguoiDungId && x.LopId == lopId)?.MonHocId;
             if(hocKy == null)
             {
                 if (DateTime.Now.Month >= 1 || DateTime.Now.Month <= 6)
@@ -150,10 +152,19 @@ namespace WebApplication2.Areas.Admin.Controllers
                 list.Add(diemCaNhan);
             }
 
+            var lop = _applicationDbContext.Lops.FirstOrDefault(i => i.Id == lopId);
+            var hockyNienKhoa =
+                _applicationDbContext.HocKyNienKhoas.FirstOrDefault(i =>
+                    i.HocKyId == hocKy && i.NienKhoaId == lop.NienKhoaId);
+            if (DateTime.Now > hockyNienKhoa.NgayKetThuc)
+            {
+                ViewBag.Disabled = true;
+            }
+
             var dto = new LayDanhSachLopForDiemDto()
             {
                 DiemCaNhans = list,
-                GVBMId = UserCurrently.Result.NguoiDungId,
+                GVBMId = UserCurrently.NguoiDungId,
                 MonHocId = monHocId,
                 LopId = lopId
             };
@@ -163,17 +174,18 @@ namespace WebApplication2.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult LuuDiem(DiemDTO dto)
         {
-            Diem diem = new Diem
+                  
+            if (dto.DiemId == 0 && dto.DiemSo.HasValue)
             {
-                DiemSo = dto.DiemSo,
-                UserId = dto.UserId,
-                LopId = dto.LopId,
-                MonHocMaMH = dto.MonHocMaMH,
-                HocKyMaHKy = dto.HocKyMaHKy,
-                LoaiDiemId = dto.LoaiDiemId
-            };
-            if (dto.DiemId == 0)
-            {
+                Diem diem = new Diem
+                {
+                    DiemSo = dto.DiemSo.Value,
+                    UserId = dto.UserId,
+                    LopId = dto.LopId,
+                    MonHocMaMH = dto.MonHocMaMH,
+                    HocKyMaHKy = dto.HocKyMaHKy,
+                    LoaiDiemId = dto.LoaiDiemId
+                };
                 _applicationDbContext.Diems.Add(diem);
             }
             else if (dto.DiemId != 0)
@@ -181,12 +193,25 @@ namespace WebApplication2.Areas.Admin.Controllers
                 var diemDb = _applicationDbContext.Diems.FirstOrDefault(i => i.DiemId == dto.DiemId);
                 if (diemDb != null)
                 {
-                    if (dto.DiemSo > 0)
+                    if (dto.DiemSo >= 0)
                     {
-                        diemDb.DiemSo = dto.DiemSo;
+                        diemDb.DiemSo = dto.DiemSo.Value;
                         _applicationDbContext.Diems.Update(diemDb);
+                        LichSu saveEdit = new LichSu
+                        {
+                            LopId = dto.LopId,
+                            UserId = dto.UserId,
+                            DiemId = dto.DiemId,
+                            MaMH = dto.MonHocMaMH,
+                            MaHKy = dto.HocKyMaHKy,
+                            LoaiDiemId = dto.LoaiDiemId,
+                            DiemTruoc = dto.DiemSo,
+                            DiemSau = diemDb.DiemSo,
+                            ThoiGian = DateTime.Now
+                        };
+                        _applicationDbContext.LichSus.Add(saveEdit);
                     }
-                    else
+                    else if (!dto.DiemSo.HasValue)
                     {
                         _applicationDbContext.Diems.Remove(diemDb);
                     }
@@ -194,6 +219,12 @@ namespace WebApplication2.Areas.Admin.Controllers
             }
             _applicationDbContext.SaveChanges();
             return Ok();
+        }
+
+        public ActionResult XemLichSu()
+        {
+            var lichsu = _applicationDbContext.LichSus.ToList();
+            return View(lichsu);
         }
 
         [HttpGet]

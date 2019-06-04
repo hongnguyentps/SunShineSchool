@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Thông Báo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model WebApplication2.POCO.SuKien
+<title>Thông Báo</title>
+
+@using (Html.BeginForm("XemTB", "Home", FormMethod.Get))
+{
+    <div class="page-container">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="main-content pt-3">
+                    <p class=" h3 tieu-de">
+                        @Model.TieuDe
+                    </p>
+                    <div>
+                        Ngày Đăng: @Model.NgayTao.ToShortDateString()
+                    </div>
+                    <div>
+                        Nội Dung:<br />
+                        @Html.Raw(Model.NoiDung.Replace(Environment.NewLine, "<br/>"))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

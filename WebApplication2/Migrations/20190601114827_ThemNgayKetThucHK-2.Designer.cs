@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication2.Data;
 
-namespace WebApplication2.Data.Migrations
+namespace WebApplication2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190601114827_ThemNgayKetThucHK-2")]
+    partial class ThemNgayKetThucHK2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -335,37 +337,6 @@ namespace WebApplication2.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Khois");
-                });
-
-            modelBuilder.Entity("WebApplication2.POCO.LichSu", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DiemId");
-
-                    b.Property<double>("DiemSau");
-
-                    b.Property<double>("DiemTruoc");
-
-                    b.Property<string>("LoaiDiemId");
-
-                    b.Property<string>("LopId");
-
-                    b.Property<string>("LyDo");
-
-                    b.Property<string>("MaHKy");
-
-                    b.Property<string>("MaMH");
-
-                    b.Property<DateTime>("ThoiGian");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LichSus");
                 });
 
             modelBuilder.Entity("WebApplication2.POCO.LoaiDiem", b =>

@@ -177,5 +177,17 @@ namespace WebApplication2.Controllers
                 .Where(x => x.HsId == idHs.MaNgDung).OrderBy(x => x.NgayViPham).ToList();
             return View(vipham);
         }
+
+        public IActionResult XemThongBao()
+        {
+            var tb = _applicationDbContext.SuKiens.OrderBy(x => x.NgayTao).ToList();
+            return View(tb);
+        }
+
+        public IActionResult XemTB(int Id)
+        {
+            var tb = _applicationDbContext.SuKiens.Where(x => x.SuKienId == Id).FirstOrDefault();
+            return View(tb);
+        }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication2.Data;
 
-namespace WebApplication2.Data.Migrations
+namespace WebApplication2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190601085902_ThemTBGV")]
+    partial class ThemTBGV
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -250,28 +252,11 @@ namespace WebApplication2.Data.Migrations
                     b.Property<string>("MaHKy")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("GhiChu");
-
                     b.Property<string>("TenHKy");
 
                     b.HasKey("MaHKy");
 
                     b.ToTable("HocKys");
-                });
-
-            modelBuilder.Entity("WebApplication2.POCO.HocKyNienKhoa", b =>
-                {
-                    b.Property<string>("HocKyId");
-
-                    b.Property<string>("NienKhoaId");
-
-                    b.Property<string>("GhiChu");
-
-                    b.Property<DateTime>("NgayKetThuc");
-
-                    b.HasKey("HocKyId", "NienKhoaId");
-
-                    b.ToTable("HocKyNienKhoas");
                 });
 
             modelBuilder.Entity("WebApplication2.POCO.HocLuc", b =>
@@ -335,37 +320,6 @@ namespace WebApplication2.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Khois");
-                });
-
-            modelBuilder.Entity("WebApplication2.POCO.LichSu", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DiemId");
-
-                    b.Property<double>("DiemSau");
-
-                    b.Property<double>("DiemTruoc");
-
-                    b.Property<string>("LoaiDiemId");
-
-                    b.Property<string>("LopId");
-
-                    b.Property<string>("LyDo");
-
-                    b.Property<string>("MaHKy");
-
-                    b.Property<string>("MaMH");
-
-                    b.Property<DateTime>("ThoiGian");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LichSus");
                 });
 
             modelBuilder.Entity("WebApplication2.POCO.LoaiDiem", b =>

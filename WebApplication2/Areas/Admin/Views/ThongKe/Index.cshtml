@@ -1,10 +1,11 @@
-﻿@{
+﻿@model WebApplication2.Areas.BaoCaoThongKe
+@{
     ViewData["Title"] = "ThongKe";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-
+    var so = @Model.SLHSGioi + @Model.SLHSKha + @Model.SLHSTB + @Model.SLHSYeu;
 }
 
-@model WebApplication2.Areas.BaoCaoThongKe
+
 <title>Báo Cáo Thống Kê</title>
 @using (Html.BeginForm("index", "ThongKe"))
 {
@@ -34,7 +35,10 @@
                                     <label>Niên Khóa</label>
                                     @Html.DropDownList("nienkhoa", (IEnumerable<SelectListItem>)ViewBag.AllNK, new { @class = "string form-control", @id = "nienkhoa" })
                                 </div>
-
+                                <div class="form-group">
+                                    <label>Lớp</label>
+                                    @Html.DropDownList("lop", (IEnumerable<SelectListItem>)ViewBag.AllLop, new { @class = "string form-control", @id = "lop" })
+                                </div>
                                 <div class="form-group">
                                     <label>&nbsp;</label>
                                     <button type="submit" class="btn-outline-danger form-control" id="submit">SEARCH</button>
@@ -44,7 +48,9 @@
                                 <canvas id="myChart"></canvas>
                             </div>
                         </div>
-
+                        <div style="text-align: center">
+                            <b>Tổng số:</b> @so học sinh
+                        </div>
                     </div>
                 </div>
             </div>
@@ -64,7 +70,47 @@
                     "label": "My First Dataset",
                     "data": [@Model.SLHSGioi, @Model.SLHSKha, @Model.SLHSTB, @Model.SLHSYeu],
                     "backgroundColor": ["rgb(255, 205, 86)", "rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(101, 96, 99)"]
-                }]
+                }],
             }
+            //"options": {
+            //    "tooltips": {
+            //        callbacks: {
+            //            label: function(tooltipItem, data) {
+            //                //get the concerned dataset
+            //                var dataset = data.datasets[tooltipItem.datasetIndex];
+            //                //calculate the total of this data set
+            //                var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+            //                    return previousValue + currentValue;
+            //                });
+            //                //get the current items value
+            //                var currentValue = dataset.data[tooltipItem.index];
+            //                //calculate the precentage based on the total and current item, also this does a rough rounding to give a whole number
+            //                var percentage = Math.floor(((currentValue/total) * 100)+0.5);
+
+            //                return percentage + "%";
+            //            }
+            //        }
+            //    }
+            //}
         });
+
+    $(document).ready(function () {
+
+        $('#khoi').change(function() {
+            var khoi = $('#khoi').val();
+            var nienkhoa = $('#nienkhoa').val();
+
+            $.ajax({url: "/admin/Thongke/getLopJson?makhoi="+ khoi + "&nienkhoa=" + nienkhoa, success: function(result) {
+                var $el = $('#lop');
+                $el.html(' ');
+                $el.append($("<option></option>")
+                    .attr("value", 0).text("All"));
+                $.each(result, function (key, value) {
+                    $el.append($("<option></option>")
+                        .attr("value", value.id).text(value.tenLop));
+                });
+            }});
+        });
+    });
+
 </script>

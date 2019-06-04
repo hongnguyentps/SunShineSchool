@@ -161,9 +161,12 @@
                         <a href="/admin/GiaoVien" class="btn btn-success">
                             <i class="fa fa-angle-left"></i> Trở lại
                         </a>
-                        <button type="submit" class="btn btn-primary" style="float: right;">
-                            <i class="fa fa-cloud-upload-alt"></i> Cập nhật
-                        </button>
+                        @if (ViewBag.Role == "Admin")
+                        {
+                            <button type="submit" class="btn btn-primary" style="float: right;">
+                                <i class="fa fa-cloud-upload-alt"></i> Cập nhật
+                            </button>
+                        }
                     </div>
                 </div>
             </div>

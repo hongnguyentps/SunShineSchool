@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.Data;
+using WebApplication2.POCO;
 
 namespace WebApplication2.Areas
 {
@@ -21,8 +22,12 @@ namespace WebApplication2.Areas
             _userManager = userManager;
         }
 
-        public IActionResult Index(string khoi = "0", string nienkhoa = "0")
+        public async Task<IActionResult> Index(string khoi = "0", string nienkhoa = "0" , string lop = "0")
         {
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            // Get the roles for the user
+            var isAdmin = await _userManager.GetRolesAsync(user);
+            ViewBag.Role = isAdmin[0];
             var data = _applicationDbContext;
             var listKhoi = data.Khois.OrderBy(x => x.Id).ToList();
             var allkhoi = new List<SelectListItem>
@@ -39,8 +44,17 @@ namespace WebApplication2.Areas
             };
             allNienKhoa.AddRange(new SelectList(listNK, "NienKhoaId", "TenNK"));
             ViewBag.AllNK = allNienKhoa;
+
+            var dsLop = GetLop(khoi, nienkhoa);
+            var allLop = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "All", Value = "0"}
+            };
+            allLop.AddRange(new SelectList(dsLop, "Id", "TenLop"));
+            ViewBag.AllLop = allLop;
+
             var kqs = _applicationDbContext.KetQuas.Where(x =>
-                (khoi == "0" || x.Lop.KhoiId == khoi) && (nienkhoa == "0" || x.Lop.NienKhoaId == nienkhoa)).ToList();
+                (khoi == "0" || x.Lop.KhoiId == khoi) && (nienkhoa == "0" || x.Lop.NienKhoaId == nienkhoa) && (lop == "0" || x.Lop.Id == lop)).ToList();
             var xeploais = kqs.Select(x => new
             {
                 Xeploai = XepLoai(x.diemTBCN)
@@ -61,6 +75,18 @@ namespace WebApplication2.Areas
             };
 
             return View(BaoCaoThongKe);
+        }
+
+        public List<Lop> GetLop(string makhoi, string nienkhoa)
+        {
+            var lop = _applicationDbContext.Lops.Where(i=> (makhoi == "0" || i.KhoiId == makhoi) && (nienkhoa == "0" || i.NienKhoaId == nienkhoa)).ToList();
+            return lop;
+        }
+
+        public JsonResult GetLopJson(string makhoi, string nienkhoa)
+        {
+            var lop = GetLop(makhoi, nienkhoa);
+            return new JsonResult(lop);
         }
 
         private string XepLoai(double diemTb)

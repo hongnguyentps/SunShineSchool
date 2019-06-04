@@ -38,5 +38,7 @@ namespace WebApplication2.POCO
         public ICollection<LopHS> LopHss { get; set; }
         public ICollection<ViPham> ViPhams { get; set; }
         public ICollection<KetQua> KetQuas { get; set; }
+        public ICollection<YKienPH> YKien { get; set; }
+        public ICollection<SuKien> SuKiens { get; set; }
     }
 }

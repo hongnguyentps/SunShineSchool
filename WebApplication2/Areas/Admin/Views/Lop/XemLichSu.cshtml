@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "XemDSTheoLop";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var index = 1;
+}
+
+@model List<WebApplication2.POCO.LichSu>
+
+<title>Lịch Sử Sửa Điểm</title>
+
+<div class="page-container">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="main-content">
+
+                <div class="table-responsive table--no-card m-b-30">
+                    <table class="table table-borderless table-striped table-earning">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã HS</th>
+                                <th>Mã Lớp </th>
+                                <th>Môn học</th>
+                                <th>Loại Điểm</th>
+                                <th>Học Kỳ</th>
+                                <th>Điểm Trước</th>
+                                <th>Điểm Sau</th>
+                                <th>Thời Gian</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@(index++)</td>
+                                    <td>@item.UserId</td>
+                                    <td>@item.LopId</td>
+                                    <td>@item.MaMH</td>
+                                    <td>@item.MaHKy</td>
+                                    <td>@item.LoaiDiemId</td>
+                                    <td>@item.DiemTruoc</td>
+                                    <td>@item.DiemSau</td>
+                                    <td>@item.ThoiGian.ToShortDateString()</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

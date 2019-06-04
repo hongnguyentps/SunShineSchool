@@ -135,15 +135,18 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a class="js-arrow" href="/admin/Admin/SuKien">
-                                <i class="fa fa-id-card"></i>Quản lý sự kiện
-                            </a>
-                        </li>
-                        @if(ViewBag.Role == "Giáo Viên")
+                        @if (ViewBag.Role == "Admin")
                         {
                             <li>
-                                <a class="js-arrow" href="/admin/Admin/ThongBao">
+                                <a class="js-arrow" href="/admin/Admin/SuKien">
+                                    <i class="fa fa-id-card"></i>Quản lý sự kiện
+                                </a>
+                            </li>
+                        }
+                        @if (ViewBag.Role == "Giáo Viên")
+                        {
+                            <li>
+                                <a class="js-arrow" href="/admin/GiaoVien/ThongBao">
                                     <i class="fa fa-id-card"></i>Quản lý thông báo
                                 </a>
                             </li>
