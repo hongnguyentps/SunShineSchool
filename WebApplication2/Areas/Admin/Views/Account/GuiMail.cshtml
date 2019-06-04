@@ -1,0 +1,68 @@
+﻿@model WebApplication2.Models.MailViewModel
+@{
+    ViewData["Title"] = "Gửi mail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<title>Gửi mail</title>
+@using (Html.BeginForm("SendMai", "Account", FormMethod.Post))
+{
+    <div class="page-container">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Gửi Email</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">Người Gửi</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                @Html.TextBoxFor(x => x.EmailForm, new { @placeholder = "Text", @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">Người Nhận</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                @Html.TextBoxFor(x => x.EmailTo, new { @placeholder = "abc@s3.edu.vn", @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">Tiêu Đề</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                @Html.TextBoxFor(x => x.TieuDe, new { @placeholder = "...", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Nội Dung</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                @Html.TextAreaFor(x => x.NoiDung, new { @placeholder = "...", @class = "form-control", rows = "5" })
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <a href="/Home" class="btn btn-success">
+                                <i class="fa fa-angle-left"></i> Trở lại
+                            </a>
+                            <button type="reset" class="btn btn-danger ml-2" style="float: right;">
+                                <i class="fa fa-ban"></i> Hoàn tác
+                            </button>
+                            <button type="submit" class="btn btn-primary" style="float: right;">
+                                <i class="fa fa-cloud-upload-alt"></i> Gửi
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

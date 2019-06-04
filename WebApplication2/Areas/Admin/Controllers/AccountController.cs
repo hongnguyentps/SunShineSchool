@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Routing;
 using ReflectionIT.Mvc.Paging;
+using SparkPostCore;
+using WebApplication2.Models;
 
 namespace WebApplication2.Areas.Admin.Controllers
 {
@@ -52,17 +54,17 @@ namespace WebApplication2.Areas.Admin.Controllers
             allrole.AddRange(new SelectList(roles, "Id", "Name"));
             ViewBag.AllRole = allrole;
             var account = (from a in data.AppUsers
-                join e in data.UserRoles on a.Id equals e.UserId
-                join t in data.Roles on e.RoleId equals t.Id
-                where role == "0" || e.RoleId == role
-                select new ApplicationUser()
-                {
-                    Ho = a.Ho,
-                    Ten = a.Ten,
-                    UserName = a.UserName,
-                    Email = a.Email,
-                    Role = t.Name
-                });
+                           join e in data.UserRoles on a.Id equals e.UserId
+                           join t in data.Roles on e.RoleId equals t.Id
+                           where role == "0" || e.RoleId == role
+                           select new ApplicationUser()
+                           {
+                               Ho = a.Ho,
+                               Ten = a.Ten,
+                               UserName = a.UserName,
+                               Email = a.Email,
+                               Role = t.Name
+                           });
             int pageSize = 5;
             ViewBag.Page = page;
             ViewBag.PageSize = pageSize;
@@ -95,7 +97,37 @@ namespace WebApplication2.Areas.Admin.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home", new {area = ""});
+            return RedirectToAction("Index", "Home", new { area = "" });
+        }
+
+        public IActionResult GuiMail(string gvEmail)
+        {
+            var emailFrom = User.Identity.Name;
+            var mail = new MailViewModel();
+            mail.EmailTo = gvEmail;
+            mail.EmailForm = emailFrom;
+            return View(mail);
+        }
+
+        [HttpPost]
+        public async Task<string> SendMai(MailViewModel mail)
+        {
+            var transmission = new Transmission();
+            transmission.Content.From.Email = "testing@sparkpostbox.com";
+            transmission.Options.Sandbox = true;
+            transmission.Content.Subject = mail.TieuDe;
+            transmission.Content.Text = mail.NoiDung;
+            transmission.Content.Html = "<html><body><p>" + mail.NoiDung + "</p></body></html>";
+
+            var recipient = new Recipient
+            {
+                Address = new Address { Email = mail.EmailTo }
+            };
+            transmission.Recipients.Add(recipient);
+
+            var client = new Client("010b286db2165f3681794521e5f0ce0baaf3e209");
+            var result = await client.Transmissions.Send(transmission);
+            return string.Empty;
         }
     }
 }

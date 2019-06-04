@@ -10,12 +10,12 @@
         <div class="container-fluid">
             <div class="main-content pt-3">
                 <p class=" h3 tieu-de">
-                    THÔNG TIN LIÊN LẠC
+                    THÔNG TIN LIÊN HỆ
                 </p>
                 <div class="hienthitt">
                     <div class="row">
                         <div class="col-4">
-                            Họ Tên:
+                            Giáo Viên:
                         </div>
                         <div class="col-8">
                             @(Model.Ho + " " + Model.Ten)
@@ -46,6 +46,7 @@
                             @Model.SDT
                         </div>
                     </div>
+                    <div>@Html.ActionLink("Gửi Email", "GuiMail", "Admin/Account", new { gvEmail = @Model.Email })</div>
                 </div>
             </div>
         </div>

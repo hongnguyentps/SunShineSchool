@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -189,5 +191,34 @@ namespace WebApplication2.Controllers
             var tb = _applicationDbContext.SuKiens.Where(x => x.SuKienId == Id).FirstOrDefault();
             return View(tb);
         }
+
+        //public IActionResult GuiMail(string gvEmail)
+        //{
+        //    var ngGui = User.Identity.Name;
+        //    var fromAddress = new MailAddress(ngGui, "From Phụ Huynh");
+        //    var toAddress = new MailAddress(gvEmail, "To Giáo Viên Chủ Nhiệm");
+        //    const string fromPassword = "gmdeptrai";
+        //    const string subject = "Thông báo mới";
+        //    const string body = "Admin vua dang t hong bao moi vao xem di";
+
+        //    var smtp = new SmtpClient
+        //    {
+        //        Host = "smtp.gmail.com",
+        //        Port = 587,
+        //        EnableSsl = true,
+        //        DeliveryMethod = SmtpDeliveryMethod.Network,
+        //        UseDefaultCredentials = false,
+        //        Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+        //    };
+        //    using (var message = new MailMessage(fromAddress, toAddress)
+        //    {
+        //        Subject = subject,
+        //        Body = body
+        //    })
+        //    {
+        //        smtp.Send(message);
+        //    }
+        //    return RedirectToAction("SuKien");
+        //}
     }
 }

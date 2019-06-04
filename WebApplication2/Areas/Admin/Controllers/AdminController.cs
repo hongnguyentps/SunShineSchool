@@ -73,7 +73,7 @@ namespace WebApplication2.Areas.Admin
             var toAddress = new MailAddress("1551010040.hong@gmail.com", "To Ng nhan");
             const string fromPassword = "gmdeptrai";
             const string subject = "Thông báo mới";
-            const string body = "Admin vua dang t hong bao moi vao xem di";
+            const string body = "Admin vua dang thong bao moi vao xem di";
 
             var smtp = new SmtpClient
             {
