@@ -88,7 +88,7 @@ namespace WebApplication2.Areas.Admin.Controllers
             var UserCurrently = await _userManager.GetUserAsync(User);
             var monHocId = _applicationDbContext.LopGvs
                 .FirstOrDefault(x => x.GVBMId == UserCurrently.NguoiDungId && x.LopId == lopId)?.MonHocId;
-            if(hocKy == null)
+            if (hocKy == null)
             {
                 if (DateTime.Now.Month >= 1 || DateTime.Now.Month <= 6)
                 {
@@ -174,7 +174,7 @@ namespace WebApplication2.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult LuuDiem(DiemDTO dto)
         {
-                  
+
             if (dto.DiemId == 0 && dto.DiemSo.HasValue)
             {
                 Diem diem = new Diem
@@ -191,6 +191,7 @@ namespace WebApplication2.Areas.Admin.Controllers
             else if (dto.DiemId != 0)
             {
                 var diemDb = _applicationDbContext.Diems.FirstOrDefault(i => i.DiemId == dto.DiemId);
+                var diemTruoc = diemDb.DiemSo;
                 if (diemDb != null)
                 {
                     if (dto.DiemSo >= 0)
@@ -202,10 +203,10 @@ namespace WebApplication2.Areas.Admin.Controllers
                             LopId = dto.LopId,
                             UserId = dto.UserId,
                             DiemId = dto.DiemId,
-                            MaMH = dto.MonHocMaMH,
+                            MHId = dto.MonHocMaMH,
                             MaHKy = dto.HocKyMaHKy,
                             LoaiDiemId = dto.LoaiDiemId,
-                            DiemTruoc = dto.DiemSo,
+                            DiemTruoc = diemTruoc,
                             DiemSau = diemDb.DiemSo,
                             ThoiGian = DateTime.Now
                         };
@@ -223,8 +224,18 @@ namespace WebApplication2.Areas.Admin.Controllers
 
         public ActionResult XemLichSu()
         {
-            var lichsu = _applicationDbContext.LichSus.ToList();
-            return View(lichsu);
+            var lichsu = (from LichSu in _applicationDbContext.LichSus
+                          join MonHoc in _applicationDbContext.MonHocs on LichSu.MHId equals MonHoc.MaMH
+                          join LoaiDiem in  _applicationDbContext.LoaiDiems on LichSu.LoaiDiemId equals LoaiDiem.Id
+                          join NguoiDung in _applicationDbContext.NguoiDungs on LichSu.UserId equals NguoiDung.MaNgDung
+                          select new { LichSu, MonHoc, LoaiDiem, NguoiDung }).ToList();
+            foreach (var item in lichsu)
+            {
+                item.LichSu.User= item.NguoiDung;
+                item.LichSu.LoaiDiem = item.LoaiDiem;
+                item.LichSu.MH = item.MonHoc;
+            }
+            return View(lichsu.Select(m=>m.LichSu).ToList());
         }
 
         [HttpGet]

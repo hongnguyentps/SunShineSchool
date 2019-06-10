@@ -19,11 +19,11 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Mã HS</th>
+                                <th>Họ Tên</th>
                                 <th>Mã Lớp </th>
                                 <th>Môn học</th>
-                                <th>Loại Điểm</th>
                                 <th>Học Kỳ</th>
+                                <th>Loại Điểm</th>
                                 <th>Điểm Trước</th>
                                 <th>Điểm Sau</th>
                                 <th>Thời Gian</th>
@@ -34,11 +34,11 @@
                             {
                                 <tr>
                                     <td>@(index++)</td>
-                                    <td>@item.UserId</td>
+                                    <td>@(item.User.Ho + " " + item.User.Ten)</td>
                                     <td>@item.LopId</td>
-                                    <td>@item.MaMH</td>
+                                    <td>@item.MH.TenMonHoc</td>
                                     <td>@item.MaHKy</td>
-                                    <td>@item.LoaiDiemId</td>
+                                    <td>@item.LoaiDiem.TenLoai</td>
                                     <td>@item.DiemTruoc</td>
                                     <td>@item.DiemSau</td>
                                     <td>@item.ThoiGian.ToShortDateString()</td>

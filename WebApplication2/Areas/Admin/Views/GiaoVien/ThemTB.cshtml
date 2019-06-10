@@ -36,7 +36,10 @@
                                 <label for="text-input" class=" form-control-label">Nội Dung</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                @Html.TextAreaFor(x => x.NoiDung, new { @placeholder = "Text", @class = "form-control", rows ="4"  })
+                                @Html.TextAreaFor(x => x.NoiDung, new { @id = "sampleEditor", @placeholder = "Text", rows = "4" })
+                                <script>  
+                                    CKEDITOR.replace("sampleEditor");
+                                </script>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -65,3 +68,8 @@
     </div>
 }
 
+<script>
+    $(document).ready(function() {
+        $('body').removeClass('animsition');
+    })
+</script>

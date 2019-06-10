@@ -4,6 +4,7 @@
     var index = 1;
     var disable = "";
     var display = "";
+    var HK = ViewBag.HocKy;
     if (ViewBag.Disabled == true)
     {
         disable = "disabled";
@@ -185,6 +186,10 @@
     </div>
 </div>
 <script>
+
+    $(document).ready(function() {
+        $('#hocky').val('@HK')
+    })
 
     $('#hocky').change(function(){
         var value = $(this).val();

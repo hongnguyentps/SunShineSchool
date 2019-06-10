@@ -192,6 +192,11 @@ namespace WebApplication2.Controllers
             return View(tb);
         }
 
+        public IActionResult XemTKB(int Id)
+        {
+            var tb = _applicationDbContext.SuKiens.Where(x => x.SuKienId == Id).FirstOrDefault();
+            return View(tb);
+        }
         //public IActionResult GuiMail(string gvEmail)
         //{
         //    var ngGui = User.Identity.Name;

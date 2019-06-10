@@ -15,7 +15,7 @@ namespace WebApplication2.POCO
 
         public string LopId { get; set; }
 
-        public string MaMH { get; set; }
+        public string MHId { get; set; }
 
         public string MaHKy { get; set; }
 
@@ -28,5 +28,11 @@ namespace WebApplication2.POCO
         public DateTime ThoiGian { get; set; }
 
         public string LyDo { get; set; }
+
+        public NguoiDung User { get; set; }
+
+        public MonHoc MH { get; set; }
+
+        public LoaiDiem LoaiDiem { get; set; }
     }
 }
